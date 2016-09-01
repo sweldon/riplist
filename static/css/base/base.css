@@ -1,0 +1,17 @@
+body
+{
+    background-color: #F0F0F0;
+}
+
+#loginbox{
+
+margin: auto;
+width:300px;
+height: 300px;
+margin-top: 200px;
+background-color: red;
+box-shadow: 2px 2px 2px #888888;
+
+
+}
+
