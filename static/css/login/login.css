@@ -1,0 +1,75 @@
+body
+{
+	margin: 0px;
+    background-color: #F0F0F0;
+}
+
+
+#loginheader{
+
+	/*border: 1px solid black;*/
+	height: 60px;
+	background: #337147;
+	line-height: 80px;
+	color: white;
+	text-align: center;
+	border-radius: 1px;
+	font-size: 28pt;
+	font-family: "Bangla MN";
+	box-shadow: 0px -1px 2px #BBBBBB;
+
+}
+#loginbox{
+
+	font-family: "Bangla MN";
+	margin:auto;
+	width: 300px;
+	/*padding: 10px;*/
+	background-color: white;
+	border-radius: 1px;
+	box-shadow: 0px 0px 2px #BBBBBB;
+	height: 270px;
+	color: #545454;
+    margin-top:300px;
+	font-size: 10pt;
+
+
+}
+
+.loginbtn {
+
+	-webkit-border-radius: 2;
+	-moz-border-radius: 2;
+	border-radius: 2px;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 13px;
+	background: #545454;
+	padding: 10px 20px 10px 20px;
+	text-decoration: none;
+
+}
+
+.loginbtn:hover {
+	background: #7a797a;
+	text-decoration: none;
+}
+
+
+#username, #password
+{
+	/*border: 1px solid #545454;*/
+	height:30px;
+	padding:4px;
+	font-size: 12pt;
+	width: 240px;
+}
+
+.inputcont{
+	padding: 3px;
+}
+.btncont{
+
+	margin-top:25px;
+
+}

@@ -1,0 +1,46 @@
+{% autoescape on %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="/static/css/login/login.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type='text/javascript' src="/static/js/base/base.js"></script>
+
+<div id="loginbox">
+
+<div id="loginheader">riplist</div>
+
+<div id="logincont" style="padding: 20px;">
+ <form id="loginForm" name="LoginForm" action="{% url 'login_page' %}" method="post">
+        {% csrf_token %}
+        {% if next %}
+            <input type="hidden" name="next" value="{{ next }}" />
+        {% endif %}
+  <div class="inputcont">
+
+        username<br />
+          <input type="text" id="username" name="username"  required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+</div>
+
+ <div class="inputcont">
+  password<br />
+          <input type="password" name="password" id="password" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+</div>
+
+ <div class="btncont">
+<center>
+        <a name='submitform' class='loginbtn' href="#" onclick="$('#loginForm').submit();"> login </a>
+{#       &nbsp; <a name='regform' class='loginbtn' href="#" onclick="$('#regform').submit();"> sign up </a>#}
+
+</center>
+ </div>
+      </form>
+</div>
+</div>
+
+
+{% endblock %}
+{% endautoescape %}
