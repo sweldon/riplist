@@ -3,29 +3,101 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/static/css/base/base.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script type='text/javascript' src="/static/js/base/base.js"></script>
     <meta charset="UTF-8">
-
+    <style>
+        #progressbar .ui-progressbar-value {
+    background-color: #99CC32;
+    }
+            #progressbar1 .ui-progressbar-value {
+    background-color: #FF9955;
+    }
+            #progressbar2 .ui-progressbar-value {
+    background-color: #7EC0EE;
+    }
+    </style>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <script>
+    $( function() {
+    $( "#progressbar" ).progressbar({
+      value: 37
+    });
+        $( "#progressbar1" ).progressbar({
+      value: 67
+    });
+        $( "#progressbar2" ).progressbar({
+      value: 45
+    });
+    } );
+    </script>
     <title>riplist</title>
 </head>
 <body>
 
-<div id="header">
 
-    <div id="headercontent">
-     <span id="branding">
-        riplist
-    </span>
 
-    <span id="accinfo">
-        <a href = "/login/logout">logout</a>
-    </span>
+
+{#<div id="header">#}
+{##}
+{#    <div id="headercontent">#}
+{#     <span id="branding">#}
+{#        riplist#}
+{#    </span>#}
+{##}
+{#    <span id="accinfo">#}
+{#        <a href = "/login/logout">logout</a>#}
+{#    </span>#}
+{#    </div>#}
+{##}
+{#</div>#}
+
+
+<div style="margin-top:10px;">
+<div id="container">
+
+<div id="leftsidebar">
+
+    <div class="sidebaritem">
+        <div id="progressbar" style="margin-top: 5px; height:20px;"></div>
+        <div id="progressbar1" style="margin-top: 10px; height:20px;"></div>
+        <div id="progressbar2" style="margin-top: 10px; height:20px;"></div>
+
+{#        <input type="text" id="directripval" />#}
+{#        <a name='submitform' class='ripbtn' id="ripbtn" href="#"> add </a>#}
+
+
     </div>
+
+</div>
+
+
+<div id="rightsidebar">
+
+    <div class="sidebaritem">
+
+
+        test
+
+{#        <input type="text" id="directripval" />#}
+{#        <a name='submitform' class='ripbtn' id="ripbtn" href="#"> add </a>#}
+
+
+    </div>
+
 </div>
 
 {% block content %}
 
+
+
 {% endblock %}
 
+</div>
+</div>
 </body>
 </html>
