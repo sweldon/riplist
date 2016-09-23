@@ -88,10 +88,10 @@ WSGI_APPLICATION = 'plapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'playlist',
+        'NAME': 'earthworks',
         'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'PASSWORD': 'password',
+        'HOST': '192.34.60.164',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
 }
