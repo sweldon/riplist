@@ -34,12 +34,26 @@ body
 	background-color: white;
 	border-radius: 1px;
 	box-shadow: 0px 0px 2px #BBBBBB;
-	height: 270px;
+	height: 16em;
 	color: #545454;
     /*margin-top:200px;*/
-	font-size: 10pt;
+	font-size: 12pt;
 
 
+}
+
+#loginbox input
+{
+	height:30px;
+	width: 100%;
+	font-size: 18;
+	border: 0;
+    outline: 0;
+    /*background: transparent;*/
+    border-bottom: 1px solid #d0d0d0;
+    padding-top:10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
 }
 
 .loginbtn {
