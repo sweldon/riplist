@@ -8,30 +8,35 @@ body
 #loginheader{
 
 	/*border: 1px solid black;*/
-	height: 50px;
+
+	height: 1.5em;
+	line-height: 1.5em;
 	background: #337147;
-	line-height: 50px;
+	padding: 2px;
 	color: white;
 	text-align: center;
-	border-radius: 1px;
-	font-size: 28pt;
+	/*border-radius: 1px;*/
+	font-size: 20pt;
+	/*font-family: "Bangla MN";*/
 	font-family: "Arial";
-	/*box-shadow: 0px 0px 2em #BBBBBB;*/
+	/*box-shadow: 0px -1px 2px #BBBBBB;*/
 	margin:auto;
+	font-face: bold;
 
 }
 #loginbox{
 
-	font-family: "Arial";
+	/*font-family: "Bangla MN";*/
+	font-family:"Arial";
 	margin:auto;
-	width: 300px;
+	/*width: 300px;*/
 	/*padding: 10px;*/
 	background-color: white;
 	border-radius: 1px;
-	box-shadow: 0px 0px 2em #BBBBBB;
-	height: 250px;
+	box-shadow: 0px 0px 2px #BBBBBB;
+	height: 270px;
 	color: #545454;
-    margin-top:200px;
+    /*margin-top:200px;*/
 	font-size: 10pt;
 
 
