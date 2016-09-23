@@ -1,13 +1,25 @@
 {% autoescape on %}
 {% block content %}
 
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="HandheldFriendly" content="true">
+
+
 <link rel="stylesheet" type="text/css" href="/static/css/login/login.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type='text/javascript' src="/static/js/base/base.js"></script>
 
-<div id="loginbox">
+
 
 <div id="loginheader">earthworks</div>
+
+
+
+
+<div id="loginbox">
+
+
 
 <div id="logincont" style="padding: 20px;">
  <form id="loginForm" name="LoginForm" action="{% url 'login_page' %}" method="post">
