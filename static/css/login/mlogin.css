@@ -25,35 +25,45 @@ body
 
 }
 #loginbox{
-
+	background: linear-gradient(#FFFFFF, #F0F0F0);
 	/*font-family: "Bangla MN";*/
 	font-family:"Arial";
 	margin:auto;
 	/*width: 300px;*/
 	/*padding: 10px;*/
 	background-color: white;
+
 	border-radius: 1px;
-	box-shadow: 0px 0px 2px #BBBBBB;
-	height: 17em;
+	/*box-shadow: 0px 0px 2px #BBBBBB;*/
+	height: 100%;
 	color: #545454;
     /*margin-top:200px;*/
 	font-size: 12pt;
 
 
 }
-
+#loginform{
+	height: 100%;
+}
+#inputcont{
+	top:50%;
+}
+.glyphicon.glyphicon-globe {
+    font-size: 8em;
+	opacity: .3;
+}
 #loginbox input
 {
 	height:30px;
-	width: 100%;
+	width: 85%;
 	font-size: 18;
 	border: 0;
     outline: 0;
-    /*background: transparent;*/
+    background: transparent;
     border-bottom: 1px solid #d0d0d0;
     padding-top:10px;
-    padding-bottom: 10px;
-    padding-left: 5px;
+	margin-left: 15px;
+
 }
 #registerlink{
     float:left;
@@ -105,9 +115,12 @@ body
 
 .inputcont{
 	padding: 3px;
+
+
 }
 .btncont{
 
 	margin-top:25px;
+
 
 }

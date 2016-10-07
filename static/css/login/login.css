@@ -20,34 +20,34 @@ body
 	/*color: #d7d7d7;*/
 
 }
+
 #loginbox{
 
 
 	margin:auto;
 	width: 320px;
 	/*padding: 10px;*/
-	background-color: white;
 	border-radius: 1px;
 	box-shadow: 0px 0px 2em #d7d7d7;
-	height: 290px;
+	height: 375px;
 	color: #545454;
     margin-top:200px;
 	font-size: 12pt;
-
+	background: linear-gradient(#FFFFFF, #FFFFFF);
 
 }
 #loginbox input
 {
 	height:30px;
-	width: 100%;
+	width: 85%;
 	font-size: 18;
 	border: 0;
     outline: 0;
     /*background: transparent;*/
     border-bottom: 1px solid #d0d0d0;
     padding-top:10px;
-    padding-bottom: 10px;
-    padding-left: 5px;
+	margin-left: 15px;
+
 }
 
 .loginbtn {
@@ -63,7 +63,10 @@ body
 	text-decoration: none;
 
 }
-
+.glyphicon.glyphicon-globe {
+    font-size: 80px;
+	opacity: .3;
+}
 .loginbtn:hover {
 	background: #7a797a;
 	text-decoration: none;

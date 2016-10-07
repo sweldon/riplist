@@ -120,4 +120,5 @@ STATICFILES_DIRS = (
     ('css', os.path.join(STATIC_ROOT, 'css').replace('\\','/')),
     ('js', os.path.join(STATIC_ROOT, 'js').replace('\\','/')),
     ('upload', os.path.join(STATIC_ROOT, 'upload').replace('\\','/')),
+    ('lib', os.path.join(STATIC_ROOT, 'lib').replace('\\','/'))
 )
