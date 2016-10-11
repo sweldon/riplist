@@ -5,7 +5,8 @@
 <link rel="stylesheet" type="text/css" href="/static/css/map/mmap.css" media="screen, handheld" />
 <link rel="stylesheet" type="text/css" href="/static/css/map/map.css" media="screen  and (min-width: 40.5em)" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<meta name="viewport" content="initial-scale=1.0">
+
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 
 {% block content %}
 
@@ -13,13 +14,76 @@
 <div id="map"></div>
 
 <script>
-  var map;
-  function initMap() {
+
+var lat = 0;
+var lng = 0;
+
+function getLat(){
+    return lat;
+}
+function getLng(){
+    return lng;
+}
+function setLat(input){
+    lat = input;
+}
+function setLng(input){
+    lng = input;
+}
+
+
+function getLocation() {
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+
+function showPosition(position) {
+
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+
+    setLat(lat);
+    setLng(lng);
+
+
+    initMap();
+
+}
+
+function showError(error) {
+    // If no location, show a mobile friendly modal asking to enable location
+
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            alert("User denied the request for Geolocation.");
+            break;
+        case error.POSITION_UNAVAILABLE:
+            alert("Location information is unavailable.");
+            break;
+        case error.TIMEOUT:
+            alert("The request to get user location timed out.");
+            break;
+        case error.UNKNOWN_ERROR:
+            alert("An unknown error occurred.");
+            break;
+    }
+}
+
+getLocation()
+
+var map;
+function initMap() {
+    var userLatLng = new google.maps.LatLng(getLat(), getLng());
     map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: -34.397, lng: 150.644},
-      zoom: 8
+        center: userLatLng,
+        zoom: 18,
+        disableDefaultUI: true,
     });
-  }
+}
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAilDy0SeP5Ex17VlL5-1v1G-Ej5SGB3s4&callback=initMap" async defer>
 
