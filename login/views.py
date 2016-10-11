@@ -18,7 +18,7 @@ def login_page(request):
 
     if request.user.is_authenticated():
 
-        return redirect('/browse')
+        return redirect('/rip')
 
     else:
 
@@ -38,7 +38,7 @@ def login_page(request):
                     #     login(request, user)
 
                     # Redirect to a success page.
-                    return redirect('/browse')
+                    return redirect('/rip')
             else:
 
                 print 'bad login'

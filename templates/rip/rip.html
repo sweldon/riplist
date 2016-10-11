@@ -1,11 +1,29 @@
-{% extends "base/base.html" %}
+{#{% extends "base/base.html" %}#}
 {% autoescape on %}
+
+{#combine this with another base page#}
+<link rel="stylesheet" type="text/css" href="/static/css/map/mmap.css" media="screen, handheld" />
+<link rel="stylesheet" type="text/css" href="/static/css/map/map.css" media="screen  and (min-width: 40.5em)" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<meta name="viewport" content="initial-scale=1.0">
+
 {% block content %}
 
 
+<div id="map"></div>
 
+<script>
+  var map;
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: -34.397, lng: 150.644},
+      zoom: 8
+    });
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAilDy0SeP5Ex17VlL5-1v1G-Ej5SGB3s4&callback=initMap" async defer>
 
-rip landing page
+</script>
 
 
 {% endblock %}
