@@ -78,7 +78,8 @@ function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
-        alert("Geolocation is not supported by this browser.");
+        var lat = 37.5407;
+        var lng = 77.4360;
     }
 }
 
