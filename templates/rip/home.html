@@ -55,9 +55,6 @@
 </div>
 <script>
 
-// Richmond, VA
-var lat = 37.5407;
-var lng = 77.4360;
 
 function getLat(){
     return lat;
@@ -78,8 +75,7 @@ function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
-        var lat = 37.5407;
-        var lng = 77.4360;
+        alert("Geolocation is not supported by this browser.");
     }
 }
 
@@ -100,17 +96,21 @@ function showError(error) {
 
     switch(error.code) {
         case error.PERMISSION_DENIED:
-            alert("User denied the request for Geolocation.");
-            break;
+            setLat(37.5407);
+            setLng(-77.4360);
+            initMap();
         case error.POSITION_UNAVAILABLE:
-            alert("Location information is unavailable.");
-            break;
+            setLat(37.5407);
+            setLng(-77.4360);
+            initMap();
         case error.TIMEOUT:
-            alert("The request to get user location timed out.");
-            break;
+            setLat(37.5407);
+            setLng(-77.4360);
+            initMap();
         case error.UNKNOWN_ERROR:
-            alert("An unknown error occurred.");
-            break;
+            setLat(37.5407);
+            setLng(-77.4360);
+            initMap();
     }
 }
 
