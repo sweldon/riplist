@@ -1,6 +1,6 @@
 body
 {
-	margin: 0px;
+	margin:auto;
     background-color: #F0F0F0;
 }
 #leftsidebar{
@@ -17,6 +17,98 @@ body
 
 }
 
+#headercontent input
+{
+	height:30px;
+	width: 20%;
+	font-size: 18;
+	border: 0;
+    outline: 0;
+    /*background: transparent;*/
+    /*border-bottom: 1px solid #d0d0d0;*/
+    /*padding-top:10px;*/
+	margin-left: 3px;
+	border-radius:2px;
+	padding:5px;
+
+
+}
+#map{
+height: 100%;
+}
+#title{
+	color:white;
+	width: 10%px;
+	margin: 0 auto;
+	text-align: center;
+	font-size:20;
+	float:right;
+}
+#mapholder{
+	margin:auto;
+	height:300px;
+	/*border:1px solid black;*/
+	margin-top:15px;
+	box-shadow: 0px 0px 10px #cfcfcf;
+}
+
+.holder{
+    font-size: 20;
+	color:white;
+	float:right;
+	height: 50px;
+	width:60px;
+	text-align: center;
+	cursor:pointer;
+}
+.holder:hover{
+	background-color: #234f31;
+}
+
+
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 180px;
+    box-shadow: 0px 2px 1px 0px #cfcfcf;
+	margin-top:18px;
+	margin-right:200px;
+	font-size: 14;
+
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    /*padding: 2px 2px;*/
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
+
+.glyphicon.glyphicon-shopping-cart, .glyphicon.glyphicon-tag ,.glyphicon.glyphicon-menu-hamburger {
+
+	margin-top: 13px;
+
+}
+.glyphicon.glyphicon-search {
+    font-size: 20;
+	margin-top:12px;
+	color:white;
+
+	/*opacity: .3;*/
+}
+
+
 .sidebaritem{
 	border-radius: 1px;
 	box-shadow: 0px 0px 2px #BBBBBB;
@@ -27,7 +119,7 @@ body
 }
 #container{
 	margin: auto;
-	width:940px;
+	width:900px;
 	/*border: 1px solid red;*/
 }
 .block{
@@ -68,8 +160,11 @@ a:active {
 }
 
 #header{
-	height: 55px;
+	height: 50px;
 	background: #337147;
+	line-height:50px;
+	box-shadow: 0px 1px 1px #8e8e8e;
+
 }
 #headercontent
 {
@@ -111,6 +206,8 @@ a:active {
 	background: #7a797a;
 	text-decoration: none;
 }
+
+
 
 
 

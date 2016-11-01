@@ -7,4 +7,5 @@ def index(request):
 
 def rip(request):
 
-    return render(request, 'rip/rip.html')
+    # return render(request, 'rip/rip.html')
+    return render(request, 'rip/home.html')
