@@ -55,7 +55,8 @@
 </div>
 <script>
 
-
+var VAlat = 36.8508;
+var VAlng = -76.2859;
 function getLat(){
     return lat;
 }
@@ -96,20 +97,20 @@ function showError(error) {
 
     switch(error.code) {
         case error.PERMISSION_DENIED:
-            setLat(37.5407);
-            setLng(-77.4360);
+            setLat(VAlat);
+            setLng(VAlng);
             initMap();
         case error.POSITION_UNAVAILABLE:
-            setLat(37.5407);
-            setLng(-77.4360);
+            setLat(VAlat);
+            setLng(VAlng);
             initMap();
         case error.TIMEOUT:
-            setLat(37.5407);
-            setLng(-77.4360);
+            setLat(VAlat);
+            setLng(VAlng);
             initMap();
         case error.UNKNOWN_ERROR:
-            setLat(37.5407);
-            setLng(-77.4360);
+            setLat(VAlat);
+            setLng(VAlng);
             initMap();
     }
 }
@@ -121,7 +122,7 @@ function initMap() {
     var userLatLng = new google.maps.LatLng(getLat(), getLng());
     map = new google.maps.Map(document.getElementById('map'), {
         center: userLatLng,
-        zoom: 18,
+        zoom: 10,
         disableDefaultUI: true,
     });
 }
