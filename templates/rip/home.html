@@ -6,10 +6,11 @@
 <link rel="stylesheet" type="text/css" href="/static/css/base/mbase.css" media="screen, handheld" />
 <link rel="stylesheet" type="text/css" href="/static/css/base/base.css" media="screen  and (min-width: 40.5em)" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
-<link rel="stylesheet" type="text/css" href="{% static 'lib/bootstrap/css/bootstrap.min.css' %}" />
-<script type="text/javascript" src='{% static "lib/bootstrap/js/bootstrap.min.js" %}'></script>
-<script type="text/javascript" src='{% static "js/base/init.js" %}'></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/css/base/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="/static/lib/bootstrap/css/bootstrap.min.css" />
+<script type="text/javascript" src='/static/lib/bootstrap/js/bootstrap.min.js'></script>
+<script type="text/javascript" src='/static/js/base/init.js'></script>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 
 <div id="header">
@@ -18,7 +19,7 @@
 
 <span class="glyphicon glyphicon-search" ></span>
 
-    <input type="text" placeholder="Search Earthworkx" />
+    <input type="text" placeholder="Search your zipcode" id="searchLocation" />
 
 
 {#<div id="title">earthworkx</div> #}
@@ -145,7 +146,109 @@ function initMap() {
 
         </div>
         <div class="modal-footer">
+			<div name='customarea' style='display: inline-block;'></div>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+<div class="modal fade" id="buyModal" role="dialog" style='width:100%; margin-top: 30px;font-size:18;'>
+<div class="modal-dialog modal-lg" style='width:500px;'>
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+             <h5 class="modal-title" name='mdhd' style="text-align: center;">Buy</h5>
+        </div>
+
+        <div class="modal-body" name='mdbd'>
+
+        <form id="buy-form">
+
+            <span class="glyphicon glyphicon-tag" id="buytag"></span>
+            <br /><br />
+            <input type="text" id="name" placeholder="Name"/>
+            <br />
+            <input type="text" id="address" placeholder="Address"/>
+            <br />
+            <input type="text" id="phone" placeholder="Phone"/>
+            <br />
+            <input type="text" id="email" placeholder="Email"/>
+            <br />
+            <input type="text" id="classification" placeholder="Classification / Soil Type"/>
+            <br />
+            <input type="text" id="amount" placeholder="Amount of Product"/>
+            <br />
+            <input type="text" id="dateneeded" placeholder="Date Needed"/>
+            <br />
+            <input type="text" id="haulopt" placeholder="Hauling Options"/>
+            <br />
+
+        </form>
+
+
+        </div>
+        <div class="modal-footer">
+			<div name='customarea' style='display: inline-block;'>
+
+                <button type="button" class="btn btn-primary">Proceed</button>
+
+            </div>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+<div class="modal fade" id="sellModal" role="dialog" style='width:100%; margin-top: 30px;font-size:18;'>
+<div class="modal-dialog modal-lg" style='width:500px;'>
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+             <h5 class="modal-title" name='mdhd' style="text-align: center;">Sell</h5>
+        </div>
+
+        <div class="modal-body" name='mdbd'>
+
+
+        <form id="buy-form">
+
+            <span class="glyphicon glyphicon-shopping-cart" id="selltag"></span>
+            <br /><br />
+            <input type="text" id="name" placeholder="Name"/>
+            <br />
+            <input type="text" id="address" placeholder="Address"/>
+            <br />
+            <input type="text" id="phone" placeholder="Phone"/>
+            <br />
+            <input type="text" id="email" placeholder="Email"/>
+            <br />
+            <input type="text" id="classification" placeholder="Classification / Soil Type"/>
+            <br />
+            <input type="text" id="amount" placeholder="Amount of Product"/>
+            <br />
+            <input type="text" id="dateavailable" placeholder="Date Available"/>
+            <br />
+            <input type="text" id="haulopt" placeholder="Hauling Options"/>
+            <br />
+            <input type="text" id="haulopt" placeholder="Photos (coming soon)"/>
+
+        </form>
+
+
+        </div>
+        <div class="modal-footer">
+			<div name='customarea' style='display: inline-block;'>
+
+                <button type="button" class="btn btn-primary">Proceed</button>
+
+            </div>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
         </div>
     </div>

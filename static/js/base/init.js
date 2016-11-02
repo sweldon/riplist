@@ -3,22 +3,45 @@
  */
 $( document ).ready(function(){
 
+$( "#dateneeded" ).datepicker();
+$( "#dateavailable" ).datepicker();
+
+$( "input#searchLocation" ).autocomplete({
+                    source: "/rip/searchLocation/",
+                    minLength: 2
+});
+
+$('#searchLocation').keyup(function(event)
+{
+    if(event.keyCode == 13)
+    {
+        // get lat and lng of city and update map with it
+    jQuery("#alertModal").find("[name='mdhd']").html("Search near you");
+    jQuery("#alertModal").find("[name='mdbd']").html("Searching coming soon")
+
+    $("#alertModal").modal('show');
+
+    }
+    // if ( event.keyCode === 27 ) { // ESC
+    //     $( "#close" ).click();
+    // }
+});
 
 $("#buy").click(function() {
 
-    jQuery("#alertModal").find("[name='mdhd']").html("Purchase");
-    jQuery("#alertModal").find("[name='mdbd']").html("Purchasing options coming soon.")
+    // jQuery("#alertModal").find("[name='mdhd']").html("Purchase");
+    // jQuery("#alertModal").find("[name='mdbd']").html("Purchasing options coming soon.")
 
-    $("#alertModal").modal('show');
+    $("#buyModal").modal('show');
 
 });
 
 $("#sell").click(function() {
 
-    jQuery("#alertModal").find("[name='mdhd']").html("Sell");
-    jQuery("#alertModal").find("[name='mdbd']").html("Vendor options coming soon.")
+    // jQuery("#alertModal").find("[name='mdhd']").html("Sell");
+    // jQuery("#alertModal").find("[name='mdbd']").html("Vendor options coming soon.")
 
-    $("#alertModal").modal('show');
+    $("#sellModal").modal('show');
 
 });
 
