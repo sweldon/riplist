@@ -7,7 +7,7 @@ $( "#dateneeded" ).datepicker();
 $( "#dateavailable" ).datepicker();
 
 $( "input#searchLocation" ).autocomplete({
-                    source: "/rip/searchLocation/",
+                    source: "/browse/searchLocation/",
                     minLength: 2
 });
 
