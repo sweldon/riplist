@@ -36,6 +36,16 @@ $("#buy").click(function() {
 
 });
 
+$("#user-link").click(function() {
+
+    jQuery("#alertModal").find("[name='mdhd']").html("User profile");
+    jQuery("#alertModal").find("[name='mdbd']").html("User profiles and ratings coming soon.")
+
+    $("#alertModal").modal('show');
+
+});
+
+
 $("#sell").click(function() {
 
     // jQuery("#alertModal").find("[name='mdhd']").html("Sell");
