@@ -11,7 +11,11 @@
 <link rel="stylesheet" type="text/css" href="/static/lib/bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript" src='/static/lib/bootstrap/js/bootstrap.min.js'></script>
 <script type="text/javascript" src='/static/js/base/init.js'></script>
+<script type="text/javascript" src='/static/js/base/map.js'></script>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAilDy0SeP5Ex17VlL5-1v1G-Ej5SGB3s4&callback=initMap" async defer>
+
+</script>
 
 <div id="header">
 
@@ -54,87 +58,63 @@
 
 <div id="container">
 
+<div id="leftsidebar">
+<div id="sidebaritem" style="height: 600px;">
 <div id="mapholder">
 <div id="map"></div>
 </div>
-<script>
-
-var VAlat = 36.8508;
-var VAlng = -76.2859;
-function getLat(){
-    return lat;
-}
-function getLng(){
-    return lng;
-}
-function setLat(input){
-    lat = input;
-}
-function setLng(input){
-    lng = input;
-}
-
-
-function getLocation() {
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
-    } else {
-        alert("Geolocation is not supported by this browser.");
-    }
-}
-
-function showPosition(position) {
-
-    var lat = position.coords.latitude;
-    var lng = position.coords.longitude;
-
-    setLat(lat);
-    setLng(lng);
-
-    initMap();
-
-}
-
-function showError(error) {
-    // If no location, show a mobile friendly modal asking to enable location
-
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            setLat(VAlat);
-            setLng(VAlng);
-            initMap();
-        case error.POSITION_UNAVAILABLE:
-            setLat(VAlat);
-            setLng(VAlng);
-            initMap();
-        case error.TIMEOUT:
-            setLat(VAlat);
-            setLng(VAlng);
-            initMap();
-        case error.UNKNOWN_ERROR:
-            setLat(VAlat);
-            setLng(VAlng);
-            initMap();
-    }
-}
-
-getLocation()
-
-var map;
-function initMap() {
-    var userLatLng = new google.maps.LatLng(getLat(), getLng());
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: userLatLng,
-        zoom: 10,
-        disableDefaultUI: true,
-    });
-}
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAilDy0SeP5Ex17VlL5-1v1G-Ej5SGB3s4&callback=initMap" async defer>
-
-</script>
 </div>
+</div>
+
+
+
+
+
+<div id="rightsidebar">
+<div id="rightsidebaritem" style="height: 60px;">
+
+<div id="avatar_small"><span class="glyphicon glyphicon-user" style="color:white;font-size:48pt;"></span></div>
+
+    <div id="avatar_content">{{ user.username }}</div>
+
+
+    <div id="avatar_stat">
+
+    <span class="glyphicon glyphicon-star" style="color:#ffdf32;"></span>
+        <span class="glyphicon glyphicon-star" style="color:#ffdf32;"></span>
+        <span class="glyphicon glyphicon-star" style="color:#ffdf32;"></span>
+        <span class="glyphicon glyphicon-star-empty" style="color:#ffdf32;"></span>
+        <span class="glyphicon glyphicon-star-empty" style="color:#ffdf32;"></span>
+
+
+    </div>
+
+</div>
+
+<div id="rightsidebaritem" style="height: 120px; margin-top:10px;">
+
+    Vendors near you
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<div id="maincontentitem" style="white-space: pre-wrap;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla varius lobortis augue. Vivamus in mollis turpis. In gravida et diam a sollicitudin. Sed commodo leo at mi placerat blandit. Cras risus leo, condimentum non leo lobortis, tempus sagittis elit. Vestibulum et aliquet felis, at feugiat odio. Integer ac nulla tincidunt augue ultricies consequat ut vitae nibh. Praesent fringilla augue sit amet mauris rhoncus, nec ultricies arcu faucibus. Praesent congue ante ligula, at molestie mi cursus at. Mauris eleifend faucibus urna at pellentesque. Aliquam efficitur luctus iaculis. Fusce iaculis non neque eu vestibulum. Nam volutpat nibh nunc. Sed fermentum molestie lectus ac elementum. Aenean vel varius nisi, sed feugiat augue.
+
+Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent elementum, metus eu ultrices dictum, libero nisi laoreet sem, at imperdiet nunc ligula sed mauris. Praesent ipsum nulla, ullamcorper in posuere in, auctor vitae nisl. Ut a consectetur quam. Sed pharetra imperdiet libero ornare volutpat. Nam euismod porttitor enim. Ut vitae felis fermentum, aliquet neque sed, faucibus sapien. Cras efficitur fermentum turpis quis tempor. In sed laoreet eros. In in pretium nunc. Proin sed semper quam. In semper diam ac nulla lacinia, at molestie arcu sodales. Fusce fermentum massa vel nunc egestas lacinia.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
 
 <div class="modal fade" id="alertModal" role="dialog" style='width:100%; margin-top: 30px;font-size:18;'>
 <div class="modal-dialog modal-lg" style='width:700px;'>

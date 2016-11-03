@@ -5,16 +5,22 @@ body
 }
 #leftsidebar{
 	float:left;
-	width: 300px;
-
+	width:250px;
 
 }
 #rightsidebar{
 	float:right;
-	width: 300px;
+	width: 270px;
 
 
+}
+#maincontentitem{
+	background: #FFFFFF;
+	box-shadow: 0px 0px 2px #bababa;
+	/*margin-top:10px;*/
 
+	padding: 10px;
+	border-radius:2px;
 }
 
 #headercontent input
@@ -70,14 +76,81 @@ height: 100%;
 
 }
 #mapholder{
-	margin:auto;
-	height:300px;
+	/*margin:auto;*/
+	height:200px;
+	width: 250px;
 	/*border:1px solid black;*/
-	margin-top:15px;
-	box-shadow: 0px 0px 10px #bababa;
+	/*margin-top:15px;*/
+	/*box-shadow: 0px 0px 10px #bababa;*/
 
 }
 
+#sidebaritem{
+
+
+	background: #FFFFFF;
+	box-shadow: 0px 0px 2px #bababa;
+	/*margin-top:10px;*/
+	position:absolute;
+	padding:5px;
+	float:left;
+	border-radius:2px;
+
+}
+#avatar_small{
+	width:64px;
+	height:64px;
+	/*border: 1px solid black;*/
+	float:left;
+	background: #A3CCFF;
+}
+.glyphicon.glyphicon-star, .glyphicon.glyphicon-star-empty {
+	font-size:10pt;
+}
+#avatar_content{
+	float:left;
+	/*border:1px solid black;*/
+	width:90px;
+	margin-left: 4px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: hidden;
+    overflow-y: hidden;
+    /*opacity:.5;*/
+
+	-webkit-mask-image: -webkit-gradient(linear, left top, right bottom,
+    from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+}
+#avatar_stat{
+
+	float:right;
+	/*border:1px solid black;*/
+	margin-left:3px;
+	width:85px;
+
+}
+
+#rightsidebaritem{
+
+	background: #FFFFFF;
+	box-shadow: 0px 0px 2px #bababa;
+	/*margin-top:10px;*/
+
+	padding: 5px;
+	border-radius:2px;
+
+}
+#maincontent{
+
+	margin: 0 auto;
+	width:530px;
+	margin-top:12px;
+	/*border:1px solid black;*/
+
+
+	/*float:left;*/
+}
 .holder{
     font-size: 20;
 	color:white;
@@ -136,7 +209,7 @@ height: 100%;
 
 }
 .glyphicon.glyphicon-search {
-    font-size: 20;
+    font-size: 20px;
 	margin-top:12px;
 	color:white;
 
@@ -144,17 +217,18 @@ height: 100%;
 }
 
 
-.sidebaritem{
+#sidebaritem{
 	border-radius: 1px;
 	box-shadow: 0px 0px 2px #BBBBBB;
 	background-color: #ffffff;
 	padding: 10px;
 	height: 100px;
+	/*margin-top:10px;*/
 
 }
 #container{
 	margin: auto;
-	width:900px;
+	width:1100px;
 	/*border: 1px solid red;*/
 }
 .block{
