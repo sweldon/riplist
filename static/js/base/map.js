@@ -1,5 +1,6 @@
 
-
+var lat;
+var lng;
 var VAlat = 36.8508;
 var VAlng = -76.2859;
 function getLat(){
@@ -60,17 +61,14 @@ function showError(error) {
     }
 }
 
-getLocation()
+getLocation();
 
 var map;
 function initMap() {
     var userLatLng = new google.maps.LatLng(getLat(), getLng());
     map = new google.maps.Map(document.getElementById('map'), {
         center: userLatLng,
-        zoom: 10,
+        zoom: 5,
         disableDefaultUI: true,
     });
 }
-/**
- * Created by weldos01 on 11/2/16.
- */

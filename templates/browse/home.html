@@ -2,7 +2,7 @@
 {% autoescape on %}
 {% load staticfiles %}
 
-{#combine this with another base page#}
+
 <link rel="stylesheet" type="text/css" href="/static/css/base/mbase.css" media="screen, handheld" />
 <link rel="stylesheet" type="text/css" href="/static/css/base/base.css" media="screen  and (min-width: 40.5em)" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -17,38 +17,34 @@
 
 </script>
 
+<div id="container">
+
 <div id="header">
 
 <div id="headercontent">
 
-<span class="glyphicon glyphicon-search" ></span>
 
-    <input type="text" placeholder="Search your zipcode" id="searchLocation" />
+    <div id="logo_wrapper">
+        <a href="/"><img src='/static/images/Logo.jpg' width="375" height="90" id="logo"/></a>
+    </div>
 
-
-{#<div id="title">earthworkx</div> #}
-
-<div class="holder" id="menudropdown">
-    <span class="glyphicon glyphicon-menu-hamburger" id="menudropdown"></span>
-
-
-<div id="home-dropdown" class="dropdown-content">
-    <a href="#" id="user-link">Hi, {{ user.username }}</a>
-    <a href="/login/logout/">Logout</a>
-</div>
-
-</div>
+<ul>
+    <li><a href="news.asp">Laydown Sites</a></li>
+    <li><a href="contact.asp">Equipment</a></li>
+    <li><a href="default.asp">Fill and Aggregate Materials</a></li>
+    <li><a href="about.asp">Consulting</a></li>
+    <li><a href="about.asp">About Us</a></li>
+</ul>
 
 
+    <div class="holder" id="menudropdown">
 
-<div class="holder" id="buy">
-    <span class="glyphicon glyphicon-shopping-cart"></span>
-</div>
+        <div id="home-dropdown" class="dropdown-content">
+            <a href="#" id="user-link">Hi, {{ user.username }}</a>
+            <a href="/login/logout/">Logout</a>
+        </div>
 
-<div class="holder" id="sell">
-    <span class="glyphicon glyphicon-tag"></span>
-</div>
-
+    </div>
 
 </div>
 
@@ -56,187 +52,49 @@
 
 {% block content %}
 
-<div id="container">
 
-<div id="leftsidebar">
-<div id="sidebaritem" style="height: 600px;">
-<div id="mapholder">
-<div id="map"></div>
-</div>
-</div>
-</div>
+
+
+    <div id="maincontent">
 
 
 
 
+    <input id="main_search" type="text" placeholder="Find fill and resources near me"/>
 
-<div id="rightsidebar">
-<div id="rightsidebaritem" style="height: 60px;">
+    <ul id="filters">
+    <li class="filter_item" ><input type="checkbox" id="mat"/>Materials</li>
+    <li class="filter_item"><input type="checkbox" id="ly"/>Laydown Yards</li>
+    <li class="filter_item"><input type="checkbox" id="eq"/>Equipment</li>
+    <li class="filter_item"><input type="checkbox" id="dist"/>Distance</li>
 
-<div id="avatar_small"><span class="glyphicon glyphicon-user" style="color:white;font-size:48pt;"></span></div>
-
-    <div id="avatar_content">{{ user.username }}</div>
+    </ul>
 
 
-    <div id="avatar_stat">
 
-    <span class="glyphicon glyphicon-star" style="color:#ffdf32;"></span>
-        <span class="glyphicon glyphicon-star" style="color:#ffdf32;"></span>
-        <span class="glyphicon glyphicon-star" style="color:#ffdf32;"></span>
-        <span class="glyphicon glyphicon-star-empty" style="color:#ffdf32;"></span>
-        <span class="glyphicon glyphicon-star-empty" style="color:#ffdf32;"></span>
+    <div id="maincontentitem">
 
+    <div id="mapholder">
+
+    <div id="map"></div>
 
     </div>
 
-</div>
-
-<div id="rightsidebaritem" style="height: 120px; margin-top:10px;">
-
-    Vendors near you
-
-</div>
-
-</div>
-
-<div id="maincontent">
-
-<div id="maincontentitem" style="white-space: pre-wrap;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla varius lobortis augue. Vivamus in mollis turpis. In gravida et diam a sollicitudin. Sed commodo leo at mi placerat blandit. Cras risus leo, condimentum non leo lobortis, tempus sagittis elit. Vestibulum et aliquet felis, at feugiat odio. Integer ac nulla tincidunt augue ultricies consequat ut vitae nibh. Praesent fringilla augue sit amet mauris rhoncus, nec ultricies arcu faucibus. Praesent congue ante ligula, at molestie mi cursus at. Mauris eleifend faucibus urna at pellentesque. Aliquam efficitur luctus iaculis. Fusce iaculis non neque eu vestibulum. Nam volutpat nibh nunc. Sed fermentum molestie lectus ac elementum. Aenean vel varius nisi, sed feugiat augue.
-
-Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent elementum, metus eu ultrices dictum, libero nisi laoreet sem, at imperdiet nunc ligula sed mauris. Praesent ipsum nulla, ullamcorper in posuere in, auctor vitae nisl. Ut a consectetur quam. Sed pharetra imperdiet libero ornare volutpat. Nam euismod porttitor enim. Ut vitae felis fermentum, aliquet neque sed, faucibus sapien. Cras efficitur fermentum turpis quis tempor. In sed laoreet eros. In in pretium nunc. Proin sed semper quam. In semper diam ac nulla lacinia, at molestie arcu sodales. Fusce fermentum massa vel nunc egestas lacinia.
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-
-
-<div class="modal fade" id="alertModal" role="dialog" style='width:100%; margin-top: 30px;font-size:18;'>
-<div class="modal-dialog modal-lg" style='width:700px;'>
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-             <h5 class="modal-title" name='mdhd'></h5>
-        </div>
-
-        <div class="modal-body" name='mdbd'>
-
-
-        </div>
-        <div class="modal-footer">
-			<div name='customarea' style='display: inline-block;'></div>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-        </div>
     </div>
-</div>
-</div>
 
-
-
-<div class="modal fade" id="buyModal" role="dialog" style='width:100%; margin-top: 30px;font-size:18;'>
-<div class="modal-dialog modal-lg" style='width:500px;'>
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-             <h5 class="modal-title" name='mdhd' style="text-align: center;">Buy</h5>
-        </div>
-
-        <div class="modal-body" name='mdbd'>
-
-        <form id="buy-form">
-
-            <span class="glyphicon glyphicon-shopping-cart" id="buytag"></span>
-            <br /><br />
-            <input type="text" id="name" placeholder="Name"/>
-            <br />
-            <input type="text" id="address" placeholder="Address"/>
-            <br />
-            <input type="text" id="phone" placeholder="Phone"/>
-            <br />
-            <input type="text" id="email" placeholder="Email"/>
-            <br />
-            <input type="text" id="classification" placeholder="Classification / Soil Type"/>
-            <br />
-            <input type="text" id="amount" placeholder="Amount of Product"/>
-            <br />
-            <input type="text" id="dateneeded" placeholder="Date Needed"/>
-            <br />
-            <input type="text" id="haulopt" placeholder="Hauling Options"/>
-            <br />
-
-        </form>
-
-
-        </div>
-        <div class="modal-footer">
-			<div name='customarea' style='display: inline-block;'>
-
-                <button type="button" class="btn btn-primary">Proceed</button>
-
-            </div>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-        </div>
     </div>
-</div>
-</div>
 
 
-<div class="modal fade" id="sellModal" role="dialog" style='width:100%; margin-top: 30px;font-size:18;'>
-<div class="modal-dialog modal-lg" style='width:500px;'>
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-             <h5 class="modal-title" name='mdhd' style="text-align: center;">Sell</h5>
-        </div>
 
-        <div class="modal-body" name='mdbd'>
-
-
-        <form id="buy-form">
-
-            <span class="glyphicon glyphicon-tag" id="selltag"></span>
-            <br /><br />
-            <input type="text" id="name" placeholder="Name"/>
-            <br />
-            <input type="text" id="address" placeholder="Address"/>
-            <br />
-            <input type="text" id="phone" placeholder="Phone"/>
-            <br />
-            <input type="text" id="email" placeholder="Email"/>
-            <br />
-            <input type="text" id="classification" placeholder="Classification / Soil Type"/>
-            <br />
-            <input type="text" id="amount" placeholder="Amount of Product"/>
-            <br />
-            <input type="text" id="dateavailable" placeholder="Date Available"/>
-            <br />
-            <input type="text" id="haulopt" placeholder="Hauling Options"/>
-            <br />
-            <input type="text" id="haulopt" placeholder="Photos (coming soon)"/>
-
-        </form>
-
-
-        </div>
-        <div class="modal-footer">
-			<div name='customarea' style='display: inline-block;'>
-
-                <button type="button" class="btn btn-primary">Proceed</button>
-
-            </div>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-        </div>
-    </div>
-</div>
-</div>
 
 {% endblock %}
+
+</div>
+
+<div id="footer">
+
+Copyright © 2016-2017, EarthWorkx, LLC. All Rights Reserved. <a href="">User Agreement</a> and <a href="">Privacy</a>
+
+</div>
+
 {% endautoescape %}

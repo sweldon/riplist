@@ -24,46 +24,50 @@
 
 <div id="loginbox">
 
-<div id="loginheader">earthworks</div>
+    <div id="loginheader">earthworks</div>
 
 
-<div id="logincont" style="padding: 20px;">
- <form id="loginForm" name="LoginForm" action="{% url 'login_page' %}" method="post">
-        {% csrf_token %}
-        {% if next %}
-            <input type="hidden" name="next" value="{{ next }}" />
-        {% endif %}
+        <div id="logincont" style="padding: 20px;">
+         <form id="loginForm" name="LoginForm" action="{% url 'login_page' %}" method="post">
+                {% csrf_token %}
+                {% if next %}
+                    <input type="hidden" name="next" value="{{ next }}" />
+                {% endif %}
 
-  <center><span class="glyphicon glyphicon-globe"></span></center><br />
-  <div class="inputcont">
-
-{#        username<br />#}
-          <span class="glyphicon glyphicon-user"></span><input type="text" id="username" name="username" placeholder="username" required>
-          <span class="highlight"></span>
-          <span class="bar"></span>
+          <center><span class="glyphicon glyphicon-globe"></span></center><br />
+          <div class="inputcont">
 
 
-<br />
-<br />
-<br />
-         <span class="glyphicon glyphicon-lock"></span><input type="password" name="password" id="password" placeholder="password" required>
-
-</div>
- <div class="btncont">
-<br />
-<center>
-        <a name='submitform' class='loginbtn' href="#" onclick="$('#loginForm').submit();"> login </a>
-</center>
-
-<br />
-     <span id ="registerlink"><a href="">register</a></span>
-     <span id ="forgotlink"><a href="">recover</a></span>
-
- </div>
+            <span class="glyphicon glyphicon-user"></span><input type="text" id="username" name="username" placeholder="username" required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
 
 
- </form>
-</div>
+            <br />
+            <br />
+            <br />
+            <span class="glyphicon glyphicon-lock"></span><input type="password" name="password" id="password" placeholder="password" required>
+
+        </div>
+
+        <div class="btncont">
+
+            <br />
+
+            <center>
+            <a name='submitform' class='loginbtn' href="#" onclick="$('#loginForm').submit();"> login </a>
+            </center>
+
+            <br />
+
+            <span id ="registerlink"><a href="">register</a></span>
+            <span id ="forgotlink"><a href="">recover</a></span>
+
+         </div>
+
+
+     </form>
+    </div>
 </div>
 
 

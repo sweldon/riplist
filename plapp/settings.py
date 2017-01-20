@@ -118,6 +118,6 @@ STATIC_ROOT = os.path.join(os.path.dirname(__file__), '../static')
 STATICFILES_DIRS = (
     ('css', os.path.join(STATIC_ROOT, 'css').replace('\\','/')),
     ('js', os.path.join(STATIC_ROOT, 'js').replace('\\','/')),
-    ('upload', os.path.join(STATIC_ROOT, 'upload').replace('\\','/')),
-    ('lib', os.path.join(STATIC_ROOT, 'lib').replace('\\','/'))
+    ('lib', os.path.join(STATIC_ROOT, 'lib').replace('\\','/')),
+    ('images', os.path.join(STATIC_ROOT, 'images').replace('\\','/'))
 )
