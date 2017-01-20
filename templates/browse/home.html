@@ -28,14 +28,15 @@
         <a href="/"><img src='/static/images/Logo.jpg' width="375" height="90" id="logo"/></a>
     </div>
 
-<ul>
-    <li><a href="news.asp">Laydown Sites</a></li>
-    <li><a href="contact.asp">Equipment</a></li>
-    <li><a href="default.asp">Fill and Aggregate Materials</a></li>
-    <li><a href="about.asp">Consulting</a></li>
-    <li><a href="about.asp">About Us</a></li>
-</ul>
-
+    <div id="navbar">
+        <ul>
+        <li><a href="news.asp">Laydown Sites</a></li>
+        <li><a href="contact.asp">Equipment</a></li>
+        <li><a href="default.asp">Fill and Aggregate Materials</a></li>
+        <li><a href="about.asp">Consulting</a></li>
+        <li><a href="about.asp">About Us</a></li>
+        </ul>
+    </div>
 
     <div class="holder" id="menudropdown">
 
@@ -57,18 +58,26 @@
 
     <div id="maincontent">
 
+    <br />
 
-
-
+    <div id="search_bar">
     <input id="main_search" type="text" placeholder="Find fill and resources near me"/>
+        <button type="button" class="btn btn-default" id="search_button">
+            <span class="glyphicon glyphicon-search"></span>
+        </button>
+
+        </div>
+
+    <br /><br />
 
     <ul id="filters">
-    <li class="filter_item" ><input type="checkbox" id="mat"/>Materials</li>
-    <li class="filter_item"><input type="checkbox" id="ly"/>Laydown Yards</li>
-    <li class="filter_item"><input type="checkbox" id="eq"/>Equipment</li>
-    <li class="filter_item"><input type="checkbox" id="dist"/>Distance</li>
-
+    <li class="filter_item" ><input type="checkbox" id="mat"/> Materials</li>
+    <li class="filter_item"><input type="checkbox" id="ly"/> Laydown Yards</li>
+    <li class="filter_item"><input type="checkbox" id="eq"/> Equipment</li>
+    <li class="filter_item"><input type="checkbox" id="dist"/> Distance</li>
     </ul>
+
+
 
 
 
