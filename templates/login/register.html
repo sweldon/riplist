@@ -20,20 +20,20 @@
 
 <div id="logo_holder">
 <a href="/"><img src='/static/images/Logo.jpg' width="255" height="75" id="logo"/></a>
-</div>
+    </div>
 
 <div id="loginbox">
 
 
     <div id="loginheader">
 
-    Log in
+    Register
 
     </div>
 
 
         <div id="logincont" style="padding: 20px;">
-         <form id="loginForm" name="LoginForm" action="{% url 'login_page' %}" method="post">
+         <form id="registerForm" name="registerForm" action="{% url 'register' %}" method="post">
                 {% csrf_token %}
                 {% if next %}
                     <input type="hidden" name="next" value="{{ next }}" />
@@ -48,11 +48,10 @@
 
 
             <br />
-              {% if error %}
-             <span id="error_prompt">Incorrect username or password</span>
-              {% endif %}
+            {% if error %}
+                <span id="error_prompt">Username already exists</span>
+            {% endif %}
             <br />
-
             <br />
             <span class="glyphicon glyphicon-lock"></span><input type="password" name="password" id="password" placeholder="password" required>
 
@@ -63,12 +62,12 @@
             <br />
 
             <center>
-            <a name='submitform' class='loginbtn' href="#" onclick="$('#loginForm').submit();"> login </a>
+            <a name='submitform' class='loginbtn' href="#" onclick="$('#registerForm').submit();"> register </a>
             </center>
 
             <br />
 
-            <span id ="registerlink"><a href="/login/register">register</a></span>
+            <span id ="registerlink"><a href="/login">login</a></span>
             <span id ="forgotlink"><a href="">recover</a></span>
 
          </div>

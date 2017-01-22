@@ -57,7 +57,7 @@ MIDDLEWARE_CLASSES = (
 LOGIN_URL = '/login'
 
 LOGIN_EXEMPT_URLS = (
-
+ r'^browse/'
 )
 
 ROOT_URLCONF = 'plapp.urls'

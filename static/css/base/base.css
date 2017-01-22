@@ -159,8 +159,17 @@ height: 100%;
 }
 
 
-
-
+.account{
+margin-right: 15px;
+margin-left: 10px;
+}
+#session{
+float:right;
+margin-right: 15px;
+}
+#session a{
+text-decoration:underline;
+}
 #container{
 	margin: auto;
 	/*height: 100%;*/

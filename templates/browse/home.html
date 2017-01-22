@@ -23,6 +23,25 @@
 
 <div id="headercontent">
 
+    <div id="session">
+    {% if user.is_authenticated %}
+        <span class="glyphicon glyphicon-user"></span> Welcome, {{ user }}.
+        <span class="account">
+        <span class="glyphicon glyphicon-log-out"></span>
+        <a href="/login/logout">Logout</a>
+
+        </span>
+    {% else %}
+
+        <span class="glyphicon glyphicon-user"></span> Welcome, guest!
+        <span class="account">
+        <a href="/login">Login</a> or
+        <a href="/login/register"> Register</a>
+        </span>
+
+    {% endif %}
+
+    </div>
 
     <div id="logo_wrapper">
         <a href="/"><img src='/static/images/Logo.jpg' width="375" height="90" id="logo"/></a>
