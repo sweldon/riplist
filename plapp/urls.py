@@ -18,6 +18,11 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.http import HttpResponseRedirect
 
+
+handler404 = 'hotspot.views.error404'
+handler500 = 'hotspot.views.error500'
+
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', lambda r: HttpResponseRedirect('browse/')),

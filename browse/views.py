@@ -19,3 +19,9 @@ def searchLocation(request):
         res.append(c.name)
         res = list(set(res))
     return HttpResponse(json.dumps(res))
+
+def error404(request):
+    return render(request,'browse/404.html')
+
+def error500(request):
+    return render(request, 'browse/500.html')
