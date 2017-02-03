@@ -1,93 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="/static/css/base/base.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-    <script type='text/javascript' src="/static/js/base/base.js"></script>
-    <meta charset="UTF-8">
-    <style>
-        #progressbar .ui-progressbar-value {
-    background-color: #99CC32;
-    }
-            #progressbar1 .ui-progressbar-value {
-    background-color: #FF9955;
-    }
-            #progressbar2 .ui-progressbar-value {
-    background-color: #7EC0EE;
-    }
-    </style>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-    <script>
-    $( function() {
-    $( "#progressbar" ).progressbar({
-      value: 37
-    });
-        $( "#progressbar1" ).progressbar({
-      value: 67
-    });
-        $( "#progressbar2" ).progressbar({
-      value: 45
-    });
-    } );
-    </script>
-    <title>riplist</title>
+<!-- <link rel="stylesheet" type="text/css" href="/static/css/base/mbase.css" media="screen, handheld" /> -->
+<link rel="stylesheet" type="text/css" href="/static/css/base/base.css" media="screen  and (min-width: 40.5em)" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/css/base/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="/static/lib/bootstrap/css/bootstrap.min.css" />
+<script type="text/javascript" src='/static/lib/bootstrap/js/bootstrap.min.js'></script>
+<script type="text/javascript" src='/static/js/base/init.js'></script>
+<script type="text/javascript" src='/static/js/base/map.js'></script>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAilDy0SeP5Ex17VlL5-1v1G-Ej5SGB3s4&callback=initMap" async defer></script>
+
+<!--Analytics-->
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-91349199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
 </head>
 <body>
 
 
 
-
-{#<div id="header">#}
-{##}
-{#    <div id="headercontent">#}
-{#     <span id="branding">#}
-{#        riplist#}
-{#    </span>#}
-{##}
-{#    <span id="accinfo">#}
-{#        <a href = "/login/logout">logout</a>#}
-{#    </span>#}
-{#    </div>#}
-{##}
-{#</div>#}
-
-
-<div style="margin-top:10px;">
 <div id="container">
 
-<div id="leftsidebar">
 
-    <div class="sidebaritem">
-        <div id="progressbar" style="margin-top: 5px; height:20px;"></div>
-        <div id="progressbar1" style="margin-top: 10px; height:20px;"></div>
-        <div id="progressbar2" style="margin-top: 10px; height:20px;"></div>
+<div id="header">
 
-{#        <input type="text" id="directripval" />#}
-{#        <a name='submitform' class='ripbtn' id="ripbtn" href="#"> add </a>#}
+<div id="headercontent">
 
+    <div id="session">
+    {% if user.is_authenticated %}
+        <span class="glyphicon glyphicon-user"></span> Welcome, {{ user }}.
+        <span class="account">
+        <span class="glyphicon glyphicon-log-out"></span>
+        <a href="/login/logout">Logout</a>
+
+        </span>
+    {% else %}
+
+        <span class="glyphicon glyphicon-user"></span> Welcome, guest!
+        <span class="account">
+        <a href="/login">Login</a> or
+        <a href="/login/register"> Register</a>
+        </span>
+
+    {% endif %}
 
     </div>
+
+    <div id="logo_wrapper">
+        <a href="/"><img src='/static/images/Logo.jpg' width="375" height="90" id="logo"/></a>
+    </div>
+
+    <div id="navbar">
+        <ul>
+        <li><a href="news.asp">Laydown Sites</a></li>
+        <li><a href="contact.asp">Equipment</a></li>
+        <li><a href="default.asp">Fill and Aggregate Materials</a></li>
+        <li><a href="about.asp">Consulting</a></li>
+        <li><a href="about.asp">About Us</a></li>
+        </ul>
+    </div>
+
 
 </div>
-
-
-<div id="rightsidebar">
-
-    <div class="sidebaritem">
-
-
-        test
-
-{#        <input type="text" id="directripval" />#}
-{#        <a name='submitform' class='ripbtn' id="ripbtn" href="#"> add </a>#}
-
-
-    </div>
 
 </div>
 
@@ -98,6 +82,12 @@
 {% endblock %}
 
 </div>
+
+<div id="footer">
+
+Copyright © 2016-2017, EarthWorkx, LLC. All Rights Reserved. <a href="">User Agreement</a> and <a href="">Privacy</a>
+
 </div>
+
 </body>
 </html>

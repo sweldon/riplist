@@ -43,7 +43,7 @@ class AuthUser(models.Model):
     password = models.CharField(max_length=128)
     last_login = models.DateTimeField(blank=True, null=True)
     is_superuser = models.IntegerField()
-    username = models.CharField(unique=True, max_length=30)
+    username = models.CharField(unique=True, max_length=150)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     email = models.CharField(max_length=254)
@@ -120,27 +120,74 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
-class Locations(models.Model):
-    zip = models.CharField(max_length=11, blank=True, null=True)
-    ziptype = models.CharField(max_length=45, blank=True, null=True)
-    city = models.CharField(max_length=45, blank=True, null=True)
-    state = models.CharField(max_length=2, blank=True, null=True)
-    loctype = models.CharField(max_length=45, blank=True, null=True)
-    lat = models.CharField(max_length=11, blank=True, null=True)
-    lng = models.CharField(max_length=11, blank=True, null=True)
-    xaxis = models.CharField(max_length=11, blank=True, null=True)
-    yaxis = models.CharField(max_length=11, blank=True, null=True)
-    zaxis = models.CharField(max_length=11, blank=True, null=True)
-    region = models.CharField(max_length=11, blank=True, null=True)
-    country = models.CharField(max_length=11, blank=True, null=True)
-    name = models.CharField(max_length=45, blank=True, null=True)
-    loc = models.CharField(max_length=45, blank=True, null=True)
-    decom = models.CharField(max_length=45, blank=True, null=True)
-    taxfiled = models.CharField(max_length=45, blank=True, null=True)
-    pop = models.CharField(max_length=45, blank=True, null=True)
-    wages = models.TextField(blank=True, null=True)
-    notes = models.TextField(blank=True, null=True)
+class Equipment(models.Model):
+    listing_type = models.CharField(max_length=5)
+    address = models.TextField()
+    city = models.TextField()
+    state = models.CharField(max_length=2)
+    zip = models.CharField(max_length=10)
+    type = models.CharField(max_length=40)
+    make = models.CharField(max_length=20)
+    model = models.CharField(max_length=30)
+    year = models.CharField(max_length=4)
+    attachments = models.TextField()
+    hauling_options = models.TextField()
+    trailer = models.CharField(max_length=3)
+    operator = models.CharField(max_length=3)
+    fuel = models.TextField()
+    date_available = models.DateField()
+    expiration_date = models.DateField()
+    date_needed = models.DateTimeField()
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    comments = models.TextField()
 
     class Meta:
         managed = False
-        db_table = 'locations'
+        db_table = 'equipment'
+
+
+class Material(models.Model):
+    listing_type = models.CharField(max_length=5)
+    address = models.TextField()
+    city = models.TextField()
+    state = models.CharField(max_length=2)
+    zip = models.CharField(max_length=10)
+    type = models.CharField(max_length=40)
+    volume = models.DecimalField(max_digits=6, decimal_places=2)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    date_available = models.DateField()
+    expiration_date = models.DateField()
+    load_price = models.DecimalField(max_digits=6, decimal_places=2)
+    haul_distance = models.DecimalField(max_digits=6, decimal_places=2)
+    haul_price = models.DecimalField(max_digits=6, decimal_places=2)
+    media_dir = models.TextField()
+    notifications = models.CharField(max_length=3)
+    comments = models.TextField()
+
+    class Meta:
+        managed = False
+        db_table = 'material'
+
+
+class Site(models.Model):
+    listing_type = models.CharField(max_length=5)
+    address = models.TextField()
+    city = models.TextField()
+    state = models.CharField(max_length=2)
+    zip = models.CharField(max_length=10)
+    size = models.CharField(max_length=10)
+    surface = models.CharField(max_length=20)
+    fenced = models.CharField(max_length=7)
+    gated = models.CharField(max_length=3)
+    num_entrances = models.IntegerField()
+    width_entrances = models.CharField(max_length=20)
+    utilities = models.TextField()
+    ammenities = models.TextField()
+    date_available = models.DateField()
+    expiration_date = models.DateField()
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    comments = models.TextField()
+
+    class Meta:
+        managed = False
+        db_table = 'site'
