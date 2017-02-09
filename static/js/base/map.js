@@ -68,7 +68,7 @@ function initMap() {
     var userLatLng = new google.maps.LatLng(getLat(), getLng());
     map = new google.maps.Map(document.getElementById('map'), {
         center: userLatLng,
-        zoom: 5,
+        zoom: 12,
         disableDefaultUI: true,
     });
 }

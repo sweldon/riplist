@@ -27,7 +27,22 @@
 <li class="filter_item" ><input type="radio" id="mat" name="filter_radio" checked/> Materials</li>
 <li class="filter_item"><input type="radio" id="ly" name="filter_radio"/> Laydown Yards</li>
 <li class="filter_item"><input type="radio" id="eq" name="filter_radio"/> Equipment</li>
-<li class="filter_item"><input type="radio" id="dist" name="filter_radio"/> Distance</li>
+<li class="filter_item"> Within </li>
+
+<select name="distance_dropdown" id="distance_dropdown">
+    <option value="10">10</option>
+    <option value="25">25</option>
+    <option value="50" selected>50</option>
+    <option value="100">100</option>
+    <option value="150">150</option>
+    <option value="200">200</option>
+    <option value="250">250</option>
+    <option value="300">300</option>
+    <option value="Any">Any</option>
+</select>
+
+    Miles
+
 </ul>
 
 
@@ -54,6 +69,11 @@
 <div id="map"></div>
 
 </div>
+{% if not user.is_authenticated %}
+    <br /><br/><br /><br/>
+{% else %}
+    <br />
+{% endif %}
 
 
 <div id="results_container">

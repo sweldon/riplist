@@ -126,6 +126,8 @@ class Equipment(models.Model):
     city = models.TextField()
     state = models.CharField(max_length=2)
     zip = models.CharField(max_length=10)
+    lat = models.CharField(max_length=20)
+    lng = models.CharField(max_length=20)
     type = models.CharField(max_length=40)
     make = models.CharField(max_length=20)
     model = models.CharField(max_length=30)
@@ -139,6 +141,7 @@ class Equipment(models.Model):
     expiration_date = models.DateField()
     date_needed = models.DateTimeField()
     price = models.DecimalField(max_digits=6, decimal_places=2)
+    rate = models.CharField(max_length=10)
     comments = models.TextField()
 
     class Meta:
@@ -152,9 +155,12 @@ class Material(models.Model):
     city = models.TextField()
     state = models.CharField(max_length=2)
     zip = models.CharField(max_length=10)
+    lat = models.CharField(max_length=20)
+    lng = models.CharField(max_length=20)
     type = models.CharField(max_length=40)
     volume = models.DecimalField(max_digits=6, decimal_places=2)
     price = models.DecimalField(max_digits=6, decimal_places=2)
+    rate = models.CharField(max_length=10)
     date_available = models.DateField()
     expiration_date = models.DateField()
     load_price = models.DecimalField(max_digits=6, decimal_places=2)
@@ -175,6 +181,8 @@ class Site(models.Model):
     city = models.TextField()
     state = models.CharField(max_length=2)
     zip = models.CharField(max_length=10)
+    lat = models.CharField(max_length=20)
+    lng = models.CharField(max_length=20)
     size = models.CharField(max_length=10)
     surface = models.CharField(max_length=20)
     fenced = models.CharField(max_length=7)
@@ -186,6 +194,7 @@ class Site(models.Model):
     date_available = models.DateField()
     expiration_date = models.DateField()
     price = models.DecimalField(max_digits=6, decimal_places=2)
+    rate = models.CharField(max_length=10)
     comments = models.TextField()
 
     class Meta:
