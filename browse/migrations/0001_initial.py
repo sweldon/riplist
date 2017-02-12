@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'auth_group',
-                'managed': True,
+                'managed': False,
             },
         ),
         migrations.CreateModel(
@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'auth_group_permissions',
-                'managed': True,
+                'managed': False,
             },
         ),
         migrations.CreateModel(
@@ -43,7 +43,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'auth_permission',
-                'managed': True,
+                'managed': False,
             },
         ),
         migrations.CreateModel(
@@ -63,7 +63,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'auth_user',
-                'managed': True,
+                'managed': False,
             },
         ),
         migrations.CreateModel(
@@ -73,7 +73,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'auth_user_groups',
-                'managed': True,
+                'managed': False,
             },
         ),
         migrations.CreateModel(
@@ -83,7 +83,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'auth_user_user_permissions',
-                'managed': True,
+                'managed': False,
             },
         ),
         migrations.CreateModel(
@@ -98,7 +98,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'django_admin_log',
-                'managed': True,
+                'managed': False,
             },
         ),
         migrations.CreateModel(
@@ -110,7 +110,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'django_content_type',
-                'managed': True,
+                'managed': False,
             },
         ),
         migrations.CreateModel(
@@ -123,7 +123,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'django_migrations',
-                'managed': True,
+                'managed': False,
             },
         ),
         migrations.CreateModel(
@@ -135,7 +135,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'django_session',
-                'managed': True,
+                'managed': False,
             },
         ),
         migrations.CreateModel(
