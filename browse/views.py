@@ -1,13 +1,13 @@
-import json
-
-from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.decorators.csrf import ensure_csrf_cookie
-from geopy.distance import vincenty
+from django.http import HttpResponse
+import json
+from browse.models import *
+from django.core.paginator import Paginator
 from geopy.geocoders import Nominatim
+from geopy.distance import vincenty
+from django.views.decorators.csrf import ensure_csrf_cookie
+from browse.models import UserProfile
 
-from ewdatabase.models import *
-from ewdatabase.models import UserProfile
 
 
 def date_handler(obj):

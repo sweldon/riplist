@@ -1,32 +1,46 @@
-from django.contrib.auth import authenticate
-from django.contrib.auth import (
-    get_user_model, )
-from django.contrib.auth import login
-from django.contrib.auth import logout
-from django.contrib.auth.forms import (
-    SetPasswordForm,
-)
+from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.contrib.auth.models import User
+from browse.models import UserProfile
+from django.contrib.auth.models import Group
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import Permission
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth import login
+from django.template import RequestContext
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+from django.shortcuts import render
+
 from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.template import loader
+from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
-from django.core.validators import validate_email
-from django.db.models.query_utils import Q
-from django.http import HttpResponseRedirect
-from django.shortcuts import redirect
-from django.shortcuts import render
-from django.shortcuts import resolve_url
-from django.template import loader
-from django.template.response import TemplateResponse
-from django.urls import reverse
-from django.utils.encoding import force_bytes
-from django.utils.encoding import force_text
-from django.utils.http import urlsafe_base64_decode
-from django.utils.http import urlsafe_base64_encode
-from django.utils.translation import gettext_lazy as _
-
-from ewdatabase.models import UserProfile
 from plapp.settings import DEFAULT_FROM_EMAIL
+from django.views.generic import *
+from django.contrib import messages
+from django.db.models.query_utils import Q
+from django.contrib.auth.forms import (
+    AuthenticationForm, PasswordChangeForm, PasswordResetForm, SetPasswordForm,
+)
+from django.contrib.auth import (
+    REDIRECT_FIELD_NAME, get_user_model, login as auth_login,
+    logout as auth_logout, update_session_auth_hash,
+)
+
+from django.contrib.auth.tokens import default_token_generator
+
+from django.http import HttpResponseRedirect, QueryDict
+from django.shortcuts import resolve_url
+from django.template.response import TemplateResponse
+from django.urls import reverse, reverse_lazy
+
+from django.utils.encoding import force_text
+from django.utils.http import is_safe_url, urlsafe_base64_decode
+from django.utils.translation import gettext_lazy as _
 
 UserModel = get_user_model()
 
