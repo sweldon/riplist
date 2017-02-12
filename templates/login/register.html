@@ -18,11 +18,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type='text/javascript' src="/static/js/base/base.js"></script>
 
+<div id="wrapper">
+
 <div id="logo_holder">
 <a href="/"><img src='/static/images/Logo.jpg' width="255" height="75" id="logo"/></a>
     </div>
 
-<div id="loginbox">
+<div id="registerbox">
 
 
     <div id="loginheader">
@@ -43,17 +45,34 @@
 
 
             <span class="glyphicon glyphicon-user"></span><input type="text" id="username" name="username" placeholder="username" required>
+
             <span class="highlight"></span>
-            <span class="bar"></span>
+        <span class="bar"></span>
+          <br /><br />
+        <input type="text" name="firstname" id="firstname" placeholder="first name"  required>
+        <input type="text" name="lastname" id="lastname" placeholder="last name"  required>
 
 
             <br />
             {% if error %}
-                <span id="error_prompt">Username already exists</span>
+                <span id="error_prompt">Username or email already exists!</span>
             {% endif %}
+
             <br />
-            <br />
-            <span class="glyphicon glyphicon-lock"></span><input type="password" name="password" id="password" placeholder="password" required>
+
+            <span class="glyphicon glyphicon-map-marker"></span><input type="text" name="address" id="address" placeholder="street address" required><br /><br />
+            <input type="text" name="zipcode" id="zipcode" placeholder="zip code" maxlength="5" required>
+            <input type="text" name="state" id="state" placeholder="state" maxlength="2" required><br /><br />
+            <span class="glyphicon glyphicon-lock"></span><input type="password" name="password" id="password" placeholder="password" required><br /><br />
+            <span class="glyphicon glyphicon-envelope"></span><input type="email" name="email" id="email" placeholder="email" required><br /><br />
+
+
+            <span class="glyphicon glyphicon-phone"></span><input type="text" name="phone1" id="phone1"   maxlength="3" required> -
+              <input type="text" name="phone2" id="phone2" maxlength="3" required> -
+              <input type="text" name="phone3" id="phone3" maxlength="4" required><br /><br />
+
+            <span class="glyphicon glyphicon-briefcase"></span><input type="text" name="business_name" id="business_name" placeholder="business name" required><br /><br />
+
 
         </div>
 
@@ -68,13 +87,17 @@
             <br />
 
             <span id ="registerlink"><a href="/login">login</a></span>
-            <span id ="forgotlink"><a href="">recover</a></span>
+            <span id ="forgotlink"><a href="/login/recover">recover</a></span>
 
          </div>
 
 
      </form>
     </div>
+</div>
+
+    <br /><br /><br /><br />
+
 </div>
 
 <div id="footer">

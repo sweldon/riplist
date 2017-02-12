@@ -19,8 +19,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.http import HttpResponseRedirect
 
 
-handler404 = 'hotspot.views.error404'
-handler500 = 'hotspot.views.error500'
+handler404 = 'browse.views.error404'
+handler500 = 'browse.views.error500'
 
 
 urlpatterns = [
@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^$', lambda r: HttpResponseRedirect('browse/')),
     url(r'^login/', include('login.urls')),
     url(r'^browse/', include('browse.urls')),
+    url(r'^create_listing/', include('list.urls')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

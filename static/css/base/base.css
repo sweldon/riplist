@@ -1,8 +1,14 @@
 html, body
 {
 
-	background: #ffffff;
+    margin: 0;
+	background: #f1f1f1;
 	font-family: Arial;
+
+}
+#wrapper{
+width:100%;
+background: #ffffff;
 
 }
 
@@ -14,7 +20,7 @@ html, body
 	border-top: 1px solid #c0c0c0;
     padding-top: 20px;
     clear: both;
-    height: 215px;
+    height: 150px;
 }
 #container{
 	margin: auto;
@@ -261,7 +267,12 @@ li{
 	margin:6px;
 	font-size: 11pt;
 }
-
+#listing_dropdown{
+padding: 10px;
+font-size:13pt;
+width: 100%;
+text-align:center;
+}
 
 #navbar{
 	margin: 5px;

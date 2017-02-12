@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 from geopy.geocoders import Nominatim
 from geopy.distance import vincenty
 from django.views.decorators.csrf import ensure_csrf_cookie
+from browse.models import UserProfile
 
 
 
@@ -66,7 +67,26 @@ def search_listings(request):
 
             #if user is logged in, use geolocator to calculate distance with their address, see line 58: geolocator.geocode(listing.address + " "+ listing.state + " "+ listing.zip)
             # it will be more accurate
-            distance_to = vincenty(location, temp_location).miles
+
+            if request.user.is_authenticated():
+
+                address = UserProfile.objects.get(user_id= request.user.id).address
+                state = UserProfile.objects.get(user_id= request.user.id).state
+                zip = UserProfile.objects.get(user_id= request.user.id).zipcode
+                loc = address + " "+ state + " "+ zip
+                usergeo = geolocator.geocode(loc)
+                if(usergeo is not None):
+                    userlocation = (usergeo.latitude, usergeo.longitude)
+                    distance_to = vincenty(location, userlocation).miles
+                    print "USER LOGGED IN: "+str(distance_to)
+                else:
+                    distance_to = vincenty(location, temp_location).miles
+                    print "USER LOGGED IN BUT LOCATION AMBIGUOUS: " + str(distance_to)
+
+            else:
+
+                distance_to = vincenty(location, temp_location).miles
+                print "ANONYMOUS USER: " + str(distance_to)
 
             if(distance_search != 'Any'):
 

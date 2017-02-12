@@ -1,3 +1,4 @@
+{#{% extends "base/base.html" %}#}
 {% autoescape on %}
 {% block content %}
 {% load staticfiles %}
@@ -23,19 +24,18 @@
 <a href="/"><img src='/static/images/Logo.jpg' width="255" height="75" id="logo"/></a>
 </div>
 
-
-<div id="loginbox">
+<div id="recoverbox">
 
 
     <div id="loginheader">
 
-    Log in
+    Recover Account
 
     </div>
 
 
         <div id="logincont" style="padding: 20px;">
-         <form id="loginForm" name="LoginForm" action="{% url 'login_page' %}" method="post">
+         <form id="recoverForm" name="recoverForm" action="{% url 'recover' %}" method="post">
                 {% csrf_token %}
                 {% if next %}
                     <input type="hidden" name="next" value="{{ next }}" />
@@ -44,34 +44,28 @@
           <div class="inputcont">
 
 
-            <span class="glyphicon glyphicon-user"></span><input type="text" id="username" name="username" placeholder="username" required>
+            <span class="glyphicon glyphicon-envelope"></span><input type="text" id="email" name="email" placeholder="email" required>
             <span class="highlight"></span>
             <span class="bar"></span>
 
-
-            <br />
-              {% if error %}
-             <span id="error_prompt">Incorrect username or password</span>
-              {% endif %}
-            <br />
-
-            <br />
-            <span class="glyphicon glyphicon-lock"></span><input type="password" name="password" id="password" placeholder="password" required>
-
         </div>
+
+        {% if success %}
+        <span id="pass_reset">Please check your email.</span>
+        {% endif %}
 
         <div class="btncont">
 
             <br /><br />
 
             <center>
-            <a name='submitform' class='loginbtn' href="#" onclick="$('#loginForm').submit();"> login </a>
+            <a name='submitform' class='loginbtn' href="#" onclick="$('#recoverForm').submit();"> send link </a>
             </center>
 
             <br />
 
             <span id ="registerlink"><a href="/login/register">register</a></span>
-            <span id ="forgotlink"><a href="/login/recover">recover</a></span>
+            <span id ="forgotlink"><a href="/login">login</a></span>
 
          </div>
 
@@ -80,19 +74,15 @@
     </div>
 </div>
 
-    <br /><br /><br /><br /><br /><br />
+    <br /> <br /> <br /> <br />
 
 </div>
-
-
 
 <div id="footer">
 
     Copyright © 2016-2017, EarthWorkx, LLC.
 
 </div>
-
-
 
 
 {% endblock %}

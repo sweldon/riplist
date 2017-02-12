@@ -55,6 +55,9 @@ class AuthUser(models.Model):
         managed = False
         db_table = 'auth_user'
 
+    def __str__(self):
+        return self.id
+
 
 class AuthUserGroups(models.Model):
     user = models.ForeignKey(AuthUser, models.DO_NOTHING)
@@ -143,6 +146,7 @@ class Equipment(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     rate = models.CharField(max_length=10)
     comments = models.TextField()
+    author = models.IntegerField()
 
     class Meta:
         managed = False
@@ -169,6 +173,7 @@ class Material(models.Model):
     media_dir = models.TextField()
     notifications = models.CharField(max_length=3)
     comments = models.TextField()
+    author = models.IntegerField()
 
     class Meta:
         managed = False
@@ -196,7 +201,21 @@ class Site(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     rate = models.CharField(max_length=10)
     comments = models.TextField()
+    author = models.IntegerField()
 
     class Meta:
         managed = False
         db_table = 'site'
+
+
+class UserProfile(models.Model):
+    user_id = models.IntegerField()
+    address = models.CharField(max_length=100)
+    zipcode = models.CharField(max_length=5)
+    state = models.CharField(max_length=2)
+    phone = models.CharField(max_length=10)
+    business = models.CharField(max_length=100)
+
+    class Meta:
+        managed = False
+        db_table = 'user_profile'

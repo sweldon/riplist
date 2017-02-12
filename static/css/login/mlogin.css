@@ -52,19 +52,7 @@ body
     font-size: 8em;
 	opacity: .3;
 }
-#loginbox input
-{
-	height:30px;
-	width: 85%;
-	font-size: 18;
-	border: 0;
-    outline: 0;
-    background: transparent;
-    border-bottom: 1px solid #d0d0d0;
-    padding-top:10px;
-	margin-left: 15px;
 
-}
 #registerlink{
     float:left;
     font-size: 13;
@@ -104,23 +92,9 @@ body
 }
 
 
-#username, #password
-{
-	/*border: 1px solid #545454;*/
-	height:30px;
-	padding:4px;
-	font-size: 12pt;
-	width: 240px;
-}
 
 .inputcont{
 	padding: 3px;
-
-
-}
-.btncont{
-
-	margin-top:25px;
 
 
 }

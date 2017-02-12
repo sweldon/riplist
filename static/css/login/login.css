@@ -1,9 +1,14 @@
 body
 {
-	margin:auto;
+	margin:0;
     background-color: #f1f1f1;
-	background: #ffffff;
+
 	font-family: Arial;
+}
+#wrapper{
+width:100%;
+background: #ffffff;
+
 }
 #logo_holder{
 text-align:center;
@@ -25,13 +30,12 @@ margin-left: -5px;
 	font-size:8pt;
 	text-align: center;
 	width: 100%;
-	height: 2000px;
-	margin-top: 80px;
 	border-top: 1px solid #c0c0c0;
     padding-top: 20px;
-
+    clear: both;
+    height: 150px;
 }
-#loginbox{
+#registerbox{
 
     background: #ffffff;
 	margin:auto;
@@ -40,11 +44,50 @@ margin-left: -5px;
 	border-radius: 1px;
 	box-shadow: 0px 0px 7px #bababa;
 
+	height: 560px;
+	font-size: 12pt;
+}
+#loginbox{
+    background: #ffffff;
+	margin:auto;
+	width: 320px;
+	/*padding: 10px;*/
+	border-radius: 1px;
+	box-shadow: 0px 0px 7px #bababa;
 	height: 290px;
 	font-size: 12pt;
-
-
 }
+#resetpassbox{
+    background: #ffffff;
+	margin:auto;
+	width: 320px;
+	/*padding: 10px;*/
+	border-radius: 1px;
+	box-shadow: 0px 0px 7px #bababa;
+	height: 245px;
+	font-size: 12pt;
+}
+#passwordcompletebox{
+    background: #ffffff;
+	margin:auto;
+	width: 320px;
+	/*padding: 10px;*/
+	border-radius: 1px;
+	box-shadow: 0px 0px 7px #bababa;
+	height: 130px;
+	font-size: 12pt;
+}
+#recoverbox{
+    background: #ffffff;
+	margin:auto;
+	width: 320px;
+	/*padding: 10px;*/
+	border-radius: 1px;
+	box-shadow: 0px 0px 7px #bababa;
+	height: 235px;
+	font-size: 12pt;
+}
+
 #logo{
 margin:20px;
 }
@@ -54,23 +97,58 @@ font-size:10pt;
 text-align:center;
 color:red;
 margin-left:50px;
-
-
 }
 
-#loginbox input
+#pass_reset{
+font-size:10pt;
+text-align:center;
+color:green;
+margin-left:75px;
+}
+
+#registerbox input
 {
 	height:30px;
-	width: 85%;
 	font-size: 18;
 	border: 0;
     outline: 0;
     /*background: transparent;*/
     border-bottom: 1px solid #d0d0d0;
     padding-top:10px;
-	margin-left: 15px;
-
 }
+
+#recoverbox input
+{
+	height:30px;
+	font-size: 18;
+	border: 0;
+    outline: 0;
+    /*background: transparent;*/
+    border-bottom: 1px solid #d0d0d0;
+    padding-top:10px;
+}
+
+#loginbox input
+{
+	height:30px;
+	font-size: 18;
+	border: 0;
+    outline: 0;
+    /*background: transparent;*/
+    border-bottom: 1px solid #d0d0d0;
+    padding-top:10px;
+}
+#resetpassbox input
+{
+	height:30px;
+	font-size: 18;
+	border: 0;
+    outline: 0;
+    /*background: transparent;*/
+    border-bottom: 1px solid #d0d0d0;
+    padding-top:10px;
+}
+
 
 .loginbtn {
 
@@ -85,23 +163,78 @@ margin-left:50px;
 	text-decoration: none;
 
 }
-.glyphicon.glyphicon-globe {
-    font-size: 80px;
-	opacity: .3;
-}
+
 .loginbtn:hover {
 	background: #7a797a;
 	text-decoration: none;
 }
 
+#changepass {
 
-#username, #password
+	-webkit-border-radius: 2;
+	-moz-border-radius: 2;
+	border-radius: 2px;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 13px;
+	background: #545454;
+	padding: 10px 20px 10px 20px;
+	text-decoration: none;
+	height:20px;
+
+}
+
+#changepass:hover {
+	background: #7a797a;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+
+#username, #password, #address, #email, #phone, #business_name
 {
 	/*border: 1px solid #545454;*/
 	height:30px;
 	padding:4px;
 	font-size: 12pt;
 	width: 240px;
+	width: 85%;
+	margin-left:15px;
+}
+#zipcode, #firstname{
+	height:30px;
+	padding:4px;
+	font-size: 12pt;
+	width: 40%;
+	margin-left:31px;
+
+}
+#state, #lastname{
+    padding:4px;
+    width: 43%;
+}
+
+#phone1
+{
+	/*border: 1px solid #545454;*/
+	height:30px;
+	padding:4px;
+	font-size: 12pt;
+	width: 18%;
+	margin-left:15px;
+}
+#phone2{
+	height:30px;
+	padding:4px;
+	font-size: 12pt;
+	width: 18%;
+
+}
+#phone3{
+	height:30px;
+	padding:4px;
+	font-size: 12pt;
+	width: 39%;
 }
 
 .inputcont{
@@ -109,6 +242,6 @@ margin-left:50px;
 }
 .btncont{
 
-	margin-top:12px;
+	margin-top:0px;
 
 }

@@ -25,7 +25,7 @@ function getLocation() {
         alert("Geolocation is not supported by this browser.");
     }
 }
-
+ 
 function showPosition(position) {
 
     var lat = position.coords.latitude;

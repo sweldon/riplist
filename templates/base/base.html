@@ -28,7 +28,7 @@
 <body>
 
 
-
+<div id="wrapper">
 <div id="container">
 
 
@@ -38,6 +38,8 @@
 
     <div id="session">
     {% if user.is_authenticated %}
+
+        <a href="#" data-toggle="modal" data-target="#createListingModal">Create a listing</a> |
         <span class="glyphicon glyphicon-user"></span> Welcome, {{ user }}.
         <span class="account">
         <span class="glyphicon glyphicon-log-out"></span>
@@ -65,10 +67,12 @@
         <li><a href="news.asp">Laydown Sites</a></li>
         <li><a href="contact.asp">Equipment</a></li>
         <li><a href="default.asp">Fill and Aggregate Materials</a></li>
-        <li><a href="about.asp">Consulting</a></li>
         <li><a href="about.asp">About Us</a></li>
         </ul>
+
     </div>
+
+
 
 
 </div>
@@ -81,6 +85,39 @@
 
 {% endblock %}
 
+    <div id="createListingModal" class="modal fade" role="dialog">
+  <div class="modal-dialog" style="width:350px;">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><center>What type of listing?</center></h4>
+      </div>
+      <div class="modal-body">
+
+   <form id="createListingForm" name="createListingForm" action="/create_listing/" method="post">
+        {% csrf_token %}
+  <select name="listing_dropdown" id="listing_dropdown" onchange="$('#createListingForm').submit();">
+
+    <option value="material">Material</option>
+    <option value="equipment">Equipment</option>
+    <option value="laydown">Laydown Site</option>
+
+    </select>
+   </form>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
 </div>
 
 <div id="footer">
