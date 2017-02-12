@@ -15,7 +15,7 @@ try:
         config_type = 'prod_settings'
         print "running in environment: prod"
     else:
-        sys.exit("Dashboard environment variable is not properly configured.")
+        sys.exit("Earthworkx environment variable is not properly configured.")
 
     # Import the configuration settings file - REPLACE projectname with your project
     config_module = __import__(config_type, globals(), locals(), 'plapp')

@@ -2,7 +2,7 @@
 from plapp.base_settings import  *
 
 DEBUG = False
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.34.60.164']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.34.60.164', 'earthworkx.com', 'www.earthworkx.com']
 
 
 DATABASES = {
