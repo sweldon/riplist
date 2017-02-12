@@ -1,9 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-import json
-from browse.models import *
-from geopy.geocoders import Nominatim
-from geopy.distance import vincenty
 from django.views.decorators.csrf import ensure_csrf_cookie
 
 
