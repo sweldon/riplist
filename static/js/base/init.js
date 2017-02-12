@@ -33,7 +33,7 @@ $( document ).ready(function(){
 
 search_data = {}
 
-$.get("http://ipinfo.io", function (response) {
+$.get("https://ipinfo.io", function (response) {
 
 search_data["user_location"] = response.loc;
 
