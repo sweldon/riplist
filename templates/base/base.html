@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- <link rel="stylesheet" type="text/css" href="/static/css/base/mbase.css" media="screen, handheld" /> -->
+
 <link rel="stylesheet" type="text/css" href="/static/css/base/base.css" media="screen  and (min-width: 40.5em)" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
@@ -9,9 +9,9 @@
 <link rel="stylesheet" type="text/css" href="/static/lib/bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript" src='/static/lib/bootstrap/js/bootstrap.min.js'></script>
 <script type="text/javascript" src='/static/js/base/init.js'></script>
-<script type="text/javascript" src='/static/js/base/map.js'></script>
+
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAilDy0SeP5Ex17VlL5-1v1G-Ej5SGB3s4&callback=initMap" async defer></script>
+
 
 <!--Analytics-->
 <script>
@@ -39,7 +39,8 @@
     <div id="session">
     {% if user.is_authenticated %}
 
-        <a href="#" data-toggle="modal" data-target="#createListingModal">Create a listing</a> |
+        <!--<a href="#" data-toggle="modal" data-target="#createListingModal">Create a listing</a> |-->
+        <a href="#" onclick="createListing()">Create a listing</a> |
         <span class="glyphicon glyphicon-user"></span> Welcome, {{ user }}.
         <span class="account">
         <span class="glyphicon glyphicon-log-out"></span>
@@ -92,19 +93,38 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"><center>What type of listing?</center></h4>
+        <h4 class="modal-title" name="mdhd"></h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" name="mdbd">
 
    <form id="createListingForm" name="createListingForm" action="/create_listing/" method="post">
         {% csrf_token %}
-  <select name="listing_dropdown" id="listing_dropdown" onchange="$('#createListingForm').submit();">
 
+   <div id="listing_type">
+
+  <select name="listing_dropdown" id="listing_dropdown" onchange="checkType()" style="display:none;">
+<!--"$('#createListingForm').submit();"-->
+    <option value="none" id="noselection">Select...</option>
     <option value="material">Material</option>
     <option value="equipment">Equipment</option>
     <option value="laydown">Laydown Site</option>
 
     </select>
+
+      </div>
+
+       <div id="buysell">
+           <br />
+
+        <button type="button" class="btn btn-primary" style="width:100%;" onclick="document.getElementById('buyorsell').value = 'buy'; $('#createListingForm').submit();">Buy</button><br /><br />
+        <button type="button" class="btn btn-success" style="width:100%;" onclick="document.getElementById('buyorsell').value = 'sell'; $('#createListingForm').submit();">Sell</button>
+
+        <input type="hidden" name="buytype" id="buyorsell" value="">
+
+
+       </div>
+
+
    </form>
 
 
@@ -119,6 +139,8 @@
 
 </div>
 </div>
+
+<br /><br /><br /><br />
 
 <div id="footer">
 

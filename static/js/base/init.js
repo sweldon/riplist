@@ -1,6 +1,43 @@
 /**
  * Created by weldos01 on 10/31/16.
 */
+
+
+
+function createListing(){
+
+
+
+$('#listing_dropdown option').prop('selected', function() {
+    return this.defaultSelected;
+});
+
+$("#noselection").select();
+
+$("#listing_dropdown").show();
+
+$("#buysell").hide();
+
+jQuery("#createListingModal").find("[name='mdhd']").html("<center>What type of listing?</center>");
+
+jQuery("#createListingModal").modal('toggle');
+
+
+}
+
+function checkType(){
+
+$('#listing_dropdown').fadeOut('fast', function() {
+    $('#buysell').fadeIn('fast');
+
+});
+
+}
+
+
+
+
+
 function getCookie(name) {
 var cookieValue = null;
 if (document.cookie && document.cookie != '') {
@@ -28,7 +65,54 @@ function addmarker(latilongi) {
     map.setCenter(marker.getPosition())
 }
 
+function checkAddress(){
+
+if($("#address_dropdown").val() == "account"){
+$("#optional_address").hide()
+}else if($("#address_dropdown").val() == "other"){
+    $("#optional_address").show()
+}
+}
+
+function checkMaterialOther(){
+
+if($("#type_dropdown").val() == "other"){
+    $("#other_explain_material").show()
+}else{
+$("#other_explain_material").hide()
+}}
+
+function checkHauling(){
+
+if($("#hauling_dropdown").val() == "yes"){
+    $("#hauling_options").show()
+}else{
+$("#hauling_options").hide()
+}}
+
+function checkLoading(){
+
+if($("#loading_dropdown").val() == "yes"){
+    $("#loading_options").show()
+}else{
+$("#loading_options").hide()
+}}
+
+
 $( document ).ready(function(){
+
+$('#material_price').on('input', function() {
+
+if($('#material_price').val() != "" && $('#material_price').val() != "")
+{
+$('#total_price').text( (parseFloat($('#material_price').val()) * parseFloat($('#material_amount').val())).toFixed(2));
+}
+
+});
+
+$( "#datepicker_available" ).datepicker();
+
+$( "#datepicker_expiration" ).datepicker();
 
 
 search_data = {}
@@ -40,11 +124,6 @@ search_data["user_location"] = response.loc;
 }, "jsonp")
 
 $( "#search_button" ).click(function() {
-
-
-
-
-
 
     input_val = $( "#main_search" ).val();
     distance_val = $( "#distance_dropdown" ).val();
