@@ -55,6 +55,8 @@ def create_listing(request):
 
 def submit_listing(request):
 
-    #save to database
+    if request.POST:
 
-    return render(request, 'browse/500.html')
+        create_type = request.POST.get("listing_dropdown")
+
+    return render(request, 'browse/404.html')

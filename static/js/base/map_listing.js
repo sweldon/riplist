@@ -88,8 +88,12 @@ function initMap() {
 
 }
 
-function updateAddress(){
+function comingSoon(){
 
+
+jQuery("#createListingModal").find("[name='mdhd']").html("<center>Image Upload</center>");
+jQuery("#createListingModal").find("[name='mdbd']").html("<center>Image uploads for your listing is in development and will be available very soon!</center>");
+jQuery("#createListingModal").modal('toggle');
 
 
 }
