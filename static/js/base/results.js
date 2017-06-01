@@ -1,4 +1,4 @@
-function postResults(result){
+function postResults(result, summary_search){
 
         $( "#results_container" ).html("");
 
