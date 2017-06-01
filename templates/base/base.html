@@ -3,12 +3,13 @@
 <head>
 
 <link rel="stylesheet" type="text/css" href="/static/css/base/base.css" media="screen  and (min-width: 40.5em)" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="/static/css/base/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="/static/lib/bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript" src='/static/lib/bootstrap/js/bootstrap.min.js'></script>
 <script type="text/javascript" src='/static/js/base/init.js'></script>
+<script type="text/javascript" src='/static/js/base/results.js'></script>
 
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 
@@ -65,10 +66,10 @@
 
     <div id="navbar">
         <ul>
-        <li><a href="news.asp">Laydown Sites</a></li>
-        <li><a href="contact.asp">Equipment</a></li>
-        <li><a href="default.asp">Fill and Aggregate Materials</a></li>
-        <li><a href="about.asp">About Us</a></li>
+        <li><a href="/browse/all_sites">Laydown Sites</a></li>
+        <li><a href="/browse/all_equipment">Equipment</a></li>
+        <li><a href="/browse/all_materials">Fill and Aggregate Materials</a></li>
+        <li><a href="/browse/about">About Us</a></li>
         </ul>
 
     </div>
@@ -106,8 +107,8 @@
 <!--"$('#createListingForm').submit();"-->
     <option value="none" id="noselection">Select...</option>
     <option value="material">Material</option>
-    <option value="equipment">Equipment</option>
-    <option value="laydown">Laydown Site</option>
+{#    <option value="equipment">Equipment</option>#}
+{#    <option value="laydown">Laydown Site</option>#}
 
     </select>
 
@@ -116,7 +117,8 @@
        <div id="buysell">
            <br />
 
-        <button type="button" class="btn btn-primary" style="width:100%;" onclick="document.getElementById('buyorsell').value = 'buy'; $('#createListingForm').submit();">Buy</button><br /><br />
+           <!-- onclick="document.getElementById('buyorsell').value = 'buy'; $('#createListingForm').submit();" -->
+        <button type="button" class="btn btn-primary disabled" style="width:100%;" >Buy</button><br /><br />
         <button type="button" class="btn btn-success" style="width:100%;" onclick="document.getElementById('buyorsell').value = 'sell'; $('#createListingForm').submit();">Sell</button>
 
         <input type="hidden" name="buytype" id="buyorsell" value="">

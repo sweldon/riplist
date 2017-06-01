@@ -7,21 +7,31 @@ from geopy.geocoders import Nominatim
 from geopy.distance import vincenty
 from django.views.decorators.csrf import ensure_csrf_cookie
 from browse.models import UserProfile
-
-
+from django.contrib.auth.models import User
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 
 def date_handler(obj):
     return obj.isoformat() if hasattr(obj, 'isoformat') else obj
 
 @ensure_csrf_cookie
 def index(request):
-
     return render(request, 'browse/home.html')
 
+def all_sites(request):
+    return render(request, 'browse/summary.html', {'type': 'laydown_yards'})
+
+def all_equipment(request):
+    return render(request, 'browse/summary.html', {'type': 'equipment'})
+
+def all_materials(request):
+    return render(request, 'browse/summary.html', {'type': 'materials'})
+
+def about(request):
+    return render(request, 'base/about.html')
+
 def search_listings(request):
-
     geolocator = Nominatim()
-
     results = {}
 
     search = request.POST.get("search")
@@ -30,18 +40,41 @@ def search_listings(request):
     equipment_search = request.POST.get("equipment")
     distance_search = request.POST.get("distance")
     temp_location = request.POST.get("user_location")
-    # depending on above flags, search appropriate models
-
+    summary = request.POST.get("summary")
     materials_results = {}
     equipment_results = {}
     laydown_results = {}
-
     markers = []
 
-    if(material_search == "true"):
+    #get this via post
+    page = 1
+    numRecords = 10
 
-        materials = Material.objects.filter(type__icontains=search)
-        for listing in materials:
+    if material_search == "true":
+
+        if summary == "true":
+
+            materials = Material.objects.all().order_by('-id')
+
+        else:
+
+            materials = Material.objects.filter(Q(type__icontains=search) | Q(city__icontains=search)).order_by('-id')
+
+
+        paginator = Paginator(materials, numRecords)
+
+        try:
+            content = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            content = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range, deliver last page of results.
+            content = paginator.page(paginator.num_pages)
+
+        total_pages = paginator.num_pages
+
+        for listing in content:
             attrs = {}
             attrs["id"] = listing.id
             attrs["listing_type"]= listing.listing_type
@@ -60,6 +93,93 @@ def search_listings(request):
             attrs["haul_price"] = str(listing.haul_price)
             attrs["media_dir"] = listing.media_dir
             attrs["notifications"] = listing.notifications
+            attrs["comments"] = listing.comments
+            attrs["images"] = listing.images.split(',')
+
+            geo = geolocator.geocode(listing.address + " "+ listing.state + " "+ listing.zip)
+            location = (geo.latitude, geo.longitude)
+
+            #if user is logged in, use geolocator to calculate distance with their address, see line 58: geolocator.geocode(listing.address + " "+ listing.state + " "+ listing.zip)
+            # it will be more accurate
+
+            if request.user.is_authenticated():
+
+                address = UserProfile.objects.get(user_id= request.user.id).address
+                state = UserProfile.objects.get(user_id= request.user.id).state
+                zip = UserProfile.objects.get(user_id= request.user.id).zipcode
+                loc = address + " "+ state + " "+ zip
+                usergeo = geolocator.geocode(loc)
+                if(usergeo is not None):
+                    userlocation = (usergeo.latitude, usergeo.longitude)
+                    distance_to = vincenty(location, userlocation).miles
+                    print "USER LOGGED IN: "+str(distance_to)
+                else:
+                    distance_to = vincenty(location, temp_location).miles
+                    print "USER LOGGED IN BUT LOCATION AMBIGUOUS: " + str(distance_to)
+
+            else:
+
+                distance_to = vincenty(location, temp_location).miles
+                print "ANONYMOUS USER: " + str(distance_to)
+
+            materials_results[listing.id] = attrs
+
+            if distance_search is None:
+                attrs["distance"] = round(distance_to, 2)
+
+            elif(distance_search != 'Any'):
+                if (int(distance_to) <= int(distance_search)):
+                    attrs["distance"] = round(distance_to,2)
+                    markers.append([geo.latitude, geo.longitude])
+            else:
+                attrs["distance"] = round(distance_to,2)
+                markers.append([geo.latitude, geo.longitude])
+
+
+    elif(laydown_search == "true"):
+
+        if summary == "true":
+
+            laydown = Site.objects.all().order_by('-id')
+
+        else:
+
+            laydown = Site.objects.filter(Q(surface__icontains=search) | Q(city__icontains=search)).order_by('-id')
+
+
+        paginator = Paginator(laydown, numRecords)
+
+        try:
+            content = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            content = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range, deliver last page of results.
+            content = paginator.page(paginator.num_pages)
+
+        total_pages = paginator.num_pages
+
+        for listing in content:
+            attrs = {}
+            attrs["id"] = listing.id
+            attrs["listing_type"]= listing.listing_type
+            attrs["address"] = listing.address
+            attrs["city"] = listing.city
+            attrs["state"] = listing.state
+            attrs["zip"] = listing.zip
+            attrs["size"] = listing.size
+            attrs["surface"] = listing.surface
+            attrs["fenced"] = listing.fenced
+            attrs["gated"] = listing.gated
+            attrs["num_entrances"] = listing.num_entrances
+            attrs["width_entrances"] = listing.width_entrances
+            attrs["utilities"] = listing.utilities
+            attrs["ammenities"] = listing.ammenities
+            attrs["date_available"] = date_handler(listing.date_available)
+            attrs["expiration_date"] = date_handler(listing.expiration_date)
+            attrs["price"] = str(listing.price)
+            attrs["rate"] = listing.rate
             attrs["comments"] = listing.comments
 
             geo = geolocator.geocode(listing.address + " "+ listing.state + " "+ listing.zip)
@@ -88,64 +208,44 @@ def search_listings(request):
                 distance_to = vincenty(location, temp_location).miles
                 print "ANONYMOUS USER: " + str(distance_to)
 
-            if(distance_search != 'Any'):
+            laydown_results[listing.id] = attrs
 
+            if distance_search is None:
+                attrs["distance"] = round(distance_to, 2)
+
+            elif(distance_search != 'Any'):
                 if (int(distance_to) <= int(distance_search)):
-                    materials_results[listing.id] = attrs
                     attrs["distance"] = round(distance_to,2)
                     markers.append([geo.latitude, geo.longitude])
             else:
-                materials_results[listing.id] = attrs
                 attrs["distance"] = round(distance_to,2)
                 markers.append([geo.latitude, geo.longitude])
 
-
-    elif(laydown_search == "true"):
-
-        laydown = Site.objects.filter(surface__icontains=search)
-        for listing in laydown:
-            attrs = {}
-            attrs["id"] = listing.id
-            attrs["listing_type"]= listing.listing_type
-            attrs["address"] = listing.address
-            attrs["city"] = listing.city
-            attrs["state"] = listing.state
-            attrs["zip"] = listing.zip
-            attrs["size"] = listing.size
-            attrs["surface"] = listing.surface
-            attrs["fenced"] = listing.fenced
-            attrs["gated"] = listing.gated
-            attrs["num_entrances"] = listing.num_entrances
-            attrs["width_entrances"] = listing.width_entrances
-            attrs["utilities"] = listing.utilities
-            attrs["ammenities"] = listing.ammenities
-            attrs["date_available"] = date_handler(listing.date_available)
-            attrs["expiration_date"] = date_handler(listing.expiration_date)
-            attrs["price"] = str(listing.price)
-            attrs["rate"] = listing.rate
-            attrs["comments"] = listing.comments
-
-            geo = geolocator.geocode(listing.address + " " + listing.state + " " + listing.zip)
-            location = (geo.latitude, geo.longitude)
-
-            distance_to = vincenty(location, temp_location).miles
-
-            if (distance_search != 'Any'):
-
-                if (int(distance_to) <= int(distance_search)):
-                    laydown_results[listing.id] = attrs
-                    attrs["distance"] = round(distance_to, 2)
-                    markers.append([geo.latitude, geo.longitude])
-            else:
-                laydown_results[listing.id] = attrs
-                attrs["distance"] = round(distance_to, 2)
-                markers.append([geo.latitude, geo.longitude])
-
-
     elif(equipment_search == 'true'):
 
-        equipment = Equipment.objects.filter(make__icontains=search)
-        for listing in equipment:
+        if summary == "true":
+
+            equipment = Equipment.objects.all().order_by('-id')
+
+        else:
+
+            equipment = Equipment.objects.filter(Q(make__icontains=search) | Q(city__icontains=search)).order_by('-id')
+
+
+        paginator = Paginator(equipment, numRecords)
+
+        try:
+            content = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            content = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range, deliver last page of results.
+            content = paginator.page(paginator.num_pages)
+
+        total_pages = paginator.num_pages
+
+        for listing in content:
             attrs = {}
             attrs["id"] = listing.id
             attrs["listing_type"] = listing.listing_type
@@ -169,23 +269,47 @@ def search_listings(request):
             attrs["rate"] = listing.rate
             attrs["comments"] = listing.comments
 
-            geo = geolocator.geocode(listing.address + " " + listing.state + " " + listing.zip)
+            geo = geolocator.geocode(listing.address + " "+ listing.state + " "+ listing.zip)
             location = (geo.latitude, geo.longitude)
 
-            distance_to = vincenty(location, temp_location).miles
+            #if user is logged in, use geolocator to calculate distance with their address, see line 58: geolocator.geocode(listing.address + " "+ listing.state + " "+ listing.zip)
+            # it will be more accurate
 
-            if (distance_search != 'Any'):
+            if request.user.is_authenticated():
 
+                address = UserProfile.objects.get(user_id= request.user.id).address
+                state = UserProfile.objects.get(user_id= request.user.id).state
+                zip = UserProfile.objects.get(user_id= request.user.id).zipcode
+                loc = address + " "+ state + " "+ zip
+                usergeo = geolocator.geocode(loc)
+                if(usergeo is not None):
+                    userlocation = (usergeo.latitude, usergeo.longitude)
+                    distance_to = vincenty(location, userlocation).miles
+                    print "USER LOGGED IN: "+str(distance_to)
+                else:
+                    distance_to = vincenty(location, temp_location).miles
+                    print "USER LOGGED IN BUT LOCATION AMBIGUOUS: " + str(distance_to)
+
+            else:
+
+                distance_to = vincenty(location, temp_location).miles
+                print "ANONYMOUS USER: " + str(distance_to)
+
+            equipment_results[listing.id] = attrs
+
+            if distance_search is None:
+                attrs["distance"] = round(distance_to, 2)
+
+            elif(distance_search != 'Any'):
                 if (int(distance_to) <= int(distance_search)):
-                    equipment_results[listing.id] = attrs
-                    attrs["distance"] = round(distance_to, 2)
+                    attrs["distance"] = round(distance_to,2)
                     markers.append([geo.latitude, geo.longitude])
             else:
-                equipment_results[listing.id] = attrs
-                attrs["distance"] = round(distance_to, 2)
+                attrs["distance"] = round(distance_to,2)
                 markers.append([geo.latitude, geo.longitude])
 
-    data = {"materials_results":materials_results, "equipment_results":equipment_results, "laydown_results":laydown_results, "markers":markers}
+
+    data = {"materials_results":materials_results, "equipment_results":equipment_results, "laydown_results":laydown_results, "markers":markers, "total_pages":get_pages(total_pages)}
     data = json.dumps(data)
     return HttpResponse(data)
 
@@ -194,3 +318,67 @@ def error404(request):
 
 def error500(request):
     return render(request, 'browse/500.html')
+
+def get_pages(total_pages):
+    html = "<a id='previous_page'>&laquo;</a> ";
+    pageList = range(1, total_pages+1)
+
+    for page in pageList:
+        html += "<a class='page_number'>" + str(page) + "</a> "
+
+    html += " <a id='next_page'>&raquo;</a>";
+    return html
+
+
+def get_address(request):
+    user = request.user.id
+    user_info = UserProfile.objects.get(user_id=user)
+    (street, zipcode, state) = [str(user_info.address), str(user_info.zipcode), str(user_info.state)]
+    geolocator = Nominatim()
+
+    success = True
+    location = [0, 0]
+
+    if request.POST.get("custom_address") is not None:
+
+        try:
+            geo = geolocator.geocode(request.POST.get("custom_address"))
+            location = [geo.latitude, geo.longitude]
+        except AttributeError:
+            success = False
+
+
+
+    else:
+        geo = geolocator.geocode(street + " " + state + " " + zipcode)
+        location = [geo.latitude, geo.longitude]
+
+    rdata = {"street":street, "zipcode":zipcode, "state":state, "lat":location[0], "lng":location[1], "success":success}
+    rdata = json.dumps(rdata)
+    return HttpResponse(rdata)
+
+def materials(request):
+
+    listing_id = request.GET.get("id")
+    listing = Material.objects.get(id=listing_id)
+    type = listing.type
+    volume = listing.volume
+    rate = listing.rate
+    title = str(type) + " - " + str(volume) + " " + str(rate)
+    images = [str(image) for image in listing.images.split(',')]
+    price = str(listing.price) + " / " + str(rate)
+    address = str(listing.address) + ", " + str(listing.city) + ", " + str(listing.state) + ", " + str(listing.zip)
+    loading = str(listing.load_price)
+    haul_price = str(listing.haul_price)
+    haul_distance = str(listing.haul_distance)
+    date_available = str(listing.date_available)
+    date_expiration = str(listing.expiration_date)
+    comments = str(listing.comments)
+    seller = str(User.objects.get(id=int(listing.author)).username)
+
+
+
+    return render(request, 'browse/listing.html',  {'title': title, 'images':images, 'price':price, 'address':address,
+                                                    'loading':loading, 'haul_price':haul_price,
+                                                    'haul_distance':haul_distance, 'date_available':date_available,
+                                                    'date_expiration':date_expiration, 'comments':comments, 'seller':seller})

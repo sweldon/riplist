@@ -14,6 +14,16 @@ background: #ffffff;
 #listing_map{
 float:right;
 }
+
+
+#image_preview{
+	margin-right: 90px;
+	margin-top: 10px;
+	width: 325px;
+	background-color: #f1f1f1;padding: 20px;
+	float:right;
+	text-align: center;
+}
 #footer{
     background-color: #f1f1f1;
 	font-size:8pt;
@@ -286,11 +296,120 @@ background-color: #f1f1f1;padding: 20px;
 float:left;
 
 }
+.image-slider{
+	width: 375px;
+}
+.image-slider img{
+	height: calc(50vh - 100px);
+	margin: 0 auto; /* it centers any block level element */
+	max-height: 400px;
+	min-width:375px;
+}
+#browse_wrapper{
+
+	margin-left: 425px;
+
+}
+#item_description{
+	width:450px;
+	float:left;
+	border-bottom:1px solid rgba(192, 192, 192, .4);
+	margin-left: 15px;
+	padding: 5px;
+	font-size: 14pt;
+
+}
+.page_number{
+	cursor:pointer;
+}
+#previous_page, #next_page{
+	cursor:pointer;
+}
+#item_comments{
+	width:450px;
+	float:left;
+	border-top:1px solid rgba(192, 192, 192, .4);
+	margin-left: 15px;
+	padding: 20px 5px 20px 5px;
+	font-size: 12pt;
+
+}
+#aboutwrapper{
+
+	border-top:1px solid rgba(192, 192, 192, .4);
+	border-bottom:1px solid rgba(192, 192, 192, .4);
+	padding: 25px;
+	width:900px;
+	margin: auto;
+}
+#pages{
+	width: 900px;
+	text-align: center;
+	background-color: #fafafa;
+
+}
+#item_price{
+	width:450px;
+	float:left;
+	margin-left: 15px;
+	padding: 5px;
+	font-size: 18pt;
+	margin-top:10px;
+	color:#b20000;
+
+}
+
+#item_address{
+	width:450px;
+	float:left;
+	margin-left: 15px;
+	padding: 5px;
+	font-size: 13pt;
+	margin-top:10px;
+}
+
+#item_specs{
+	width:450px;
+	float:left;
+	margin-left: 15px;
+	padding: 5px;
+	font-size: 12pt;
+	margin-top:10px;
+}
+#specs_table{
+	border-collapse:collapse;
+	width: 100%;
+}
+#specs_table tr:nth-child(even) {background: #FFF}
+#specs_table tr:nth-child(odd) {background: #eaeaea}
+#specs_table td{
+	padding:12px 8px 12px 8px;
+}
+#carousel_wrapper{
+
+	width: 375px;
+	height: 400px;
+	/*float:left; */
+	background: #ffffff;
+	/*border-radius: 1px;*/
+	box-shadow: 0px 0px 15px #bababa;
+	/*font-size: 12pt;*/
+	/*padding:15px;*/
+	/*height: 265px;*/
+
+
+}
 #listing_map{
 float:left;
 width: 365px;
 height: 250px;
 margin-left: 10px;
+}
+#browse_listing_map{
+float:left;
+
+	margin-left: 110px;
+
 }
 #navbar{
 	margin: 5px;
@@ -357,8 +476,8 @@ margin-left: 10px;
 
 .thumbnail_item{
 
-    width: 125px;
-    height: 125px;
+    /*width: 125px;*/
+    /*height: 125px;*/
     margin-left: 15px;
     float:left;
 }
@@ -380,6 +499,25 @@ color: blue;
 }
 
 
+.thumb {
+	height:75px;
+    margin: 0.2em -0.7em 0 0;
+}
+.remove_img_preview {
+    position:relative;
+    top:-70px;
+    right:-2px;
+    background:red;
+    color:white;
+    border-radius:50px;
+    font-size:0.9em;
+    padding: 0 0.3em 0;
+    text-align:center;
+    cursor:pointer;
+}
+.remove_img_preview:before {
+    content: "×";
+}
 
 
 

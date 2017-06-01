@@ -1,0 +1,170 @@
+{% extends "base/base.html" %}
+{% autoescape on %}
+{% load staticfiles %}
+{% block content %}
+
+<script type="text/javascript" src='/static/js/base/map_listing.js'></script>
+<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyAilDy0SeP5Ex17VlL5-1v1G-Ej5SGB3s4&callback=initMap" async defer></script>
+
+  <link rel="stylesheet" type="text/css" href="/static/lib/slick/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="/static/lib/slick/slick/slick-theme.css"/>
+  </head>
+  <body>
+
+
+  <script type="text/javascript" src="/static/lib/slick/slick/slick.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.image-slider').slick({
+            dots:true,
+            arrows:false
+      });
+    });
+  </script>
+
+
+<div id="maincontent">
+
+<br />
+<br />
+
+
+<div id="browse_listing_map">
+
+<div id="carousel_wrapper">
+  <div class="image-slider">
+
+    {% for image in images %}
+         <div><img src="/media/{{ image }}" /></div>
+    {% endfor %}
+  </div>
+
+</div>
+
+
+</div>
+
+{#<div id="listing_map">#}
+{##}
+{#</div>#}
+
+<div id="browse_wrapper">
+
+<div id="item_description">
+
+    {{ title }}
+    <span style="float:right;font-size:12pt;"><a id="user_link" style="cursor:pointer;">{{ seller }}</a> ( <span class="glyphicon glyphicon-star" style="color:#FCD116;"></span>  <font style="color:#00BFFF; font-size: 10pt;">1,000</font>)</span>
+
+</div>
+
+<div id="item_price">
+
+    ${{ price }}
+
+    <button type="button" class="btn btn-warning" style="float:right" id="contact_btn">Contact Seller</button>
+    <button type="button" class="btn btn-primary" style="float:right; margin-right:10px;" id="purchase_btn">Purchase</button>
+
+
+</div>
+
+<div id="item_address">
+
+    {{ address }}
+
+</div>
+
+<div id="item_specs">
+
+    <table id="specs_table">
+
+        <tr><td>Date Available</td><td>{{ date_available }}</td></tr>
+        <tr><td>Expiration Date</td><td>{{ date_expiration }}</td></tr>
+        {% if loading  != "" %}
+        <tr><td>Loading Price</td><td>${{ loading }}</td></tr>
+        {% else %}
+        <tr><td>Loading Price</td><td>Not Offered</td></tr>
+        {% endif %}
+        {% if haul_price  != "" %}
+            <tr><td>Hauling Price</td><td>${{ haul_price }} (within <b>{{ haul_distance }}</b> miles)</td></tr>
+        {% else %}
+        <tr><td>Hauling Price</td><td>Not Offered</td></tr>
+        {% endif %}
+
+    </table>
+
+</div>
+
+<div id="item_comments">
+
+    {{ comments }}
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div id="uploadImageModal" class="modal fade" role="dialog">
+  <div class="modal-dialog" style="width:600px;">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header"> Upload Images
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" name="mdhd"></h4>
+      </div>
+      <div class="modal-body" name="mdbd">
+
+{##}
+{#  <form method="post" enctype="multipart/form-data" action="/create_listing/upload_image" id="image_form">#}
+{#    {% csrf_token %}#}
+
+
+<center><input type="file" id="files" name="image_file_arr" multiple required> <br /><br />
+
+      <output id="list"></output>
+
+</center>
+
+{#  </form>#}
+<center><button type="button" class="btn btn-primary" id="submit_images" onclick="$('#show_images').html('<br />' + $('#list').html());$('#uploadImageModal').modal('hide');">Done Choosing</button></center>
+
+</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+</div>
+
+
+<br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br />
+<br /><br /><br />
+
+
+{% endblock %}
+
+
+
+
+{% endautoescape %}

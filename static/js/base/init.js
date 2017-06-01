@@ -2,11 +2,7 @@
  * Created by weldos01 on 10/31/16.
 */
 
-
-
 function createListing(){
-
-
 
 $('#listing_dropdown option').prop('selected', function() {
     return this.defaultSelected;
@@ -33,10 +29,6 @@ $('#listing_dropdown').fadeOut('fast', function() {
 });
 
 }
-
-
-
-
 
 function getCookie(name) {
 var cookieValue = null;
@@ -65,13 +57,68 @@ function addmarker(latilongi) {
     map.setCenter(marker.getPosition())
 }
 
+function updateListingMap(){
+
+        $("#loading_div").html("<img src='/static/images/loading_gears.gif' />");
+
+        var csrftoken = getCookie('csrftoken');
+
+        custom_address = $("#custom_street").val() + " " + $("#custom_state").val() + " " + $("#custom_zip").val();
+
+        jQuery.ajax({
+        "headers" : {'X-CSRFToken': csrftoken},
+        "url": "/browse/get_address",
+        "type": "POST",
+        "dataType": "json",
+        'data': {"custom_address": custom_address},
+        success: function (result) {
+            $("#loading_div").html("");
+            if(result.success){
+                addmarker(new google.maps.LatLng(result.lat, result.lng))
+            }else{
+                $("#loading_div").html("<font color='red'><span class='glyphicon glyphicon-exclamation-sign'></span> Couldn't find address!</font>");
+            }
+
+        }
+    });
+
+}
+
 function checkAddress(){
 
-if($("#address_dropdown").val() == "account"){
-$("#optional_address").hide()
-}else if($("#address_dropdown").val() == "other"){
-    $("#optional_address").show()
-}
+    if($("#address_dropdown").val() == "account"){
+
+        $("#loading_div").html("<img src='/static/images/loading_gears.gif' width='58' height='58'/>");
+
+        var csrftoken = getCookie('csrftoken');
+
+        jQuery.ajax({
+            "headers" : {'X-CSRFToken': csrftoken},
+            "url": "/browse/get_address",
+            "type": "POST",
+            "dataType": "json",
+            success: function (result) {
+                $("#loading_div").html("");
+                var street = result.street;
+                var zip = result.zipcode;
+                var state = result.state;
+                $("#account_address").html("<b>"+street+", "+state+", "+zip+"</b><br /><br />");
+                addmarker(new google.maps.LatLng(result.lat, result.lng))
+            }
+        });
+
+        $("#optional_address").hide()
+        $("#account_address").show()
+
+    }else if($("#address_dropdown").val() == "other"){
+
+        $("#account_address").hide()
+        $("#optional_address").show()
+    }else{
+        $("#optional_address").hide()
+        $("#account_address").hide()
+    }
+
 }
 
 function checkMaterialOther(){
@@ -123,26 +170,56 @@ search_data["user_location"] = response.loc;
 
 }, "jsonp")
 
+$("#purchase_btn").click(function() {
+
+    $("#createListingModal").find("[name='mdhd']").html("<center>Coming Soon!</center>");
+    $("#createListingModal").find("[name='mdbd']").html("<center>Purchasing in development, please check back soon.</center>");
+    $("#createListingModal").modal('toggle');
+
+});
+$("#contact_btn").click(function() {
+
+    $("#createListingModal").find("[name='mdhd']").html("<center>Coming Soon!</center>");
+    $("#createListingModal").find("[name='mdbd']").html("<center>Contact seller in development, please check back soon.</center>");
+    $("#createListingModal").modal('toggle');
+
+});
+$("#user_link").click(function() {
+
+    $("#createListingModal").find("[name='mdhd']").html("<center>Coming Soon!</center>");
+    $("#createListingModal").find("[name='mdbd']").html("<center>This will link to the user's profile page. The score in parentheses is the user's feedback score. The colors will be representative of their trustworthiness.</center>");
+    $("#createListingModal").modal('toggle');
+
+});
 $( "#search_button" ).click(function() {
 
-    input_val = $( "#main_search" ).val();
-    distance_val = $( "#distance_dropdown" ).val();
 
-    materials = $( "#mat" ).is(':checked');
-    laydown_yards = $( "#ly" ).is(':checked');
-    equipment = $( "#eq" ).is(':checked');
+    input_val = $( "#main_search" ).val();
+    if(input_val != '') {
+        search_data={}
+        input_val = $("#main_search").val();
+        distance_val = $("#distance_dropdown").val();
+
+        materials = $("#mat").is(':checked');
+        laydown_yards = $("#ly").is(':checked');
+        equipment = $("#eq").is(':checked');
+
+        search_data["search"] = input_val
+        search_data["materials"] = materials
+        search_data["laydown_yards"] = laydown_yards
+        search_data["equipment"] = equipment
+        search_data["distance"] = distance_val
+        search_data["summary"] = "false"
+
+        query(search_data);
+    }
+
+});
+function query(search_data) {
+
+     $("#results_container").html("<div id='loading_results'><img src='/static/images/loading_gears.gif'></img><br /><br /></div>");
 
     var csrftoken = getCookie('csrftoken');
-
-    if(input_val != ''){
-
-    search_data["search"]=input_val
-    search_data["materials"]=materials
-    search_data["laydown_yards"]= laydown_yards
-    search_data["equipment"]=equipment
-    search_data["distance"]= distance_val
-
-    $( "#results_container" ).html("<div id='loading_results'><img src='/static/images/loading_gears.gif'></img><br /><br /></div>");
 
     jQuery.ajax({
     headers : {'X-CSRFToken': csrftoken},
@@ -152,56 +229,7 @@ $( "#search_button" ).click(function() {
     dataType:"json",
     success: function(result){
 
-        $( "#results_container" ).html("");
-
-        if( Object.keys(result.materials_results).length > 0){
-
-        materials = result.materials_results
-
-            for (var listing in materials) {
-                var newlisting = '<a href="/browse/m/?id='+materials[listing]["id"]+'"><div class="result_item"><div class="type_material"></div><div class="thumbnail_item"><img src="/static/images/gravel.jpg"></img></div><div class="main_details"><div class="title_item">'+materials[listing]["volume"]+' '+materials[listing]["rate"]+' '+materials[listing]["type"]+'</div><div class="price">$'+materials[listing]["price"]+'/'+materials[listing]["rate"]+'</div></div><div class="details_container"><div class="distance">Distance: <b>'+materials[listing]["distance"]+' mi.</b></div><div class="date_available">Date Available: <b>'+materials[listing]["date_available"]+'</b></div><div class="material_details">Loading: <b>Yes</b><br />Hauling: <b>Yes</b></div></div></div></a><br />'
-                $( "#results_container" ).append(newlisting);
-            }
-
-        }
-        else if(Object.keys(result.laydown_results).length > 0){
-
-        sites = result.laydown_results
-
-            for (var listing in sites) {
-                var newlisting = '<a href="/browse/s/?id='+sites[listing]["id"]+'"><div class="result_item"><div class="type_laydown"></div><div class="thumbnail_item"><img src="/static/images/dirt.jpg"></img></div><div class="main_details"><div class="title_item">'+sites[listing]["size"]+' '+sites[listing]["surface"]+' - '+sites[listing]["city"]+'</div><div class="price">$'+sites[listing]["price"]+'/'+sites[listing]["rate"]+'</div></div><div class="details_container"><div class="distance">Distance: <b>'+sites[listing]["distance"]+' mi.</b></div><div class="date_available">Date Available: <b>'+sites[listing]["date_available"]+'</b></div><div class="material_details">Loading: <b>Yes</b><br />Hauling: <b>Yes</b></div></div></div></a><br />'
-                $( "#results_container" ).append(newlisting);
-            }
-
-        }
-
-        else if(Object.keys(result.equipment_results).length > 0){
-        equipment = result.equipment_results
-
-            for (var listing in equipment) {
-                var newlisting = '<a href="/browse/e/?id='+equipment[listing]["id"]+'"><div class="result_item"><div class="type_equipment"></div><div class="thumbnail_item"><img src="/static/images/tcrane.jpg"></img></div><div class="main_details"><div class="title_item">'+equipment[listing]["year"]+' '+equipment[listing]["make"]+' '+equipment[listing]["model"]+' '+equipment[listing]["type"]+'</div><div class="price">$'+equipment[listing]["price"]+'/'+equipment[listing]["rate"]+'</div></div><div class="details_container"><div class="distance">Distance: <b>'+equipment[listing]["distance"]+' mi.</b></div><div class="date_available">Date Available: <b>'+equipment[listing]["date_available"]+'</b></div><div class="material_details">Loading: <b>Yes</b><br />Hauling: <b>Yes</b></div></div></div></a><br />'
-                $( "#results_container" ).append(newlisting);
-            }
-
-        }
-        else{
-         $( "#results_container" ).html("<div id='loading_results'><span class='glyphicon glyphicon-alert'></span> <span style='margin-left:15px;  opacity: .5;'>No results</span><br /><br /></div>");
-        }
-
-
-        //update map
-        //add results to page
-        //document.getElementById('results_container').scrollIntoView();
-        for(var i=0; i< result.markers.length; i++){
-        addmarker(new google.maps.LatLng(result.markers[i][0], result.markers[i][1]))
-        }
-
-        $('html, body').animate({
-        scrollTop: $("#mapholder").offset().top
-        }, 500);
-
-
-
+        postResults(result, false);
 
     },error:function(result){
         alert("search error")
@@ -209,8 +237,6 @@ $( "#search_button" ).click(function() {
 });
     }
 
-
-});
 
 $( "#dateneeded" ).datepicker();
 $( "#dateavailable" ).datepicker();

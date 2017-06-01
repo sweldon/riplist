@@ -10,6 +10,12 @@ from __future__ import unicode_literals
 from django.db import models
 
 
+#
+# def get_file_path(instance, filename):
+#     ext = filename.split('.')[-1]
+#     filename = "%s.%s" % (uuid.uuid4(), ext)
+#     return os.path.join('materials/', filename)
+
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=80)
 
@@ -162,21 +168,22 @@ class Material(models.Model):
     lat = models.CharField(max_length=20)
     lng = models.CharField(max_length=20)
     type = models.CharField(max_length=40)
-    volume = models.DecimalField(max_digits=6, decimal_places=2)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
+    volume =  models.CharField(max_length=6)
+    price =  models.CharField(max_length=6)
     rate = models.CharField(max_length=10)
     date_available = models.DateField()
     expiration_date = models.DateField()
-    load_price = models.DecimalField(max_digits=6, decimal_places=2)
-    haul_distance = models.DecimalField(max_digits=6, decimal_places=2)
-    haul_price = models.DecimalField(max_digits=6, decimal_places=2)
+    load_price = models.CharField(max_length=6)
+    haul_distance = models.CharField(max_length=6)
+    haul_price = models.CharField(max_length=6)
     media_dir = models.TextField()
     notifications = models.CharField(max_length=3)
     comments = models.TextField()
     author = models.IntegerField()
+    images = models.TextField(null=True, blank=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'material'
 
 
@@ -211,11 +218,12 @@ class Site(models.Model):
 class UserProfile(models.Model):
     user_id = models.IntegerField()
     address = models.CharField(max_length=100)
+    city = models.CharField(max_length=100, null=True)
     zipcode = models.CharField(max_length=5)
     state = models.CharField(max_length=2)
     phone = models.CharField(max_length=10)
     business = models.CharField(max_length=100)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'user_profile'

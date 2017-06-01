@@ -4,7 +4,19 @@
 {% block content %}
 
 <script type="text/javascript" src='/static/js/base/map_listing.js'></script>
+<script type="text/javascript" src='/static/js/base/previewimage.js'></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAilDy0SeP5Ex17VlL5-1v1G-Ej5SGB3s4&callback=initMap" async defer></script>
+
+<script type="text/javascript">
+
+    $( document ).ready(function(){
+    document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
+
+
+    });
+
+</script>
 
 <div id="maincontent">
 
@@ -17,34 +29,43 @@
 <div id="listing_wrapper">
 
 
-    <form id="materialSellForm" name="materialSellForm" action="submit" method="post">
+<form id="materialSellForm" enctype="multipart/form-data" name="materialSellForm" action="/create_listing/submit" method="post">
         {% csrf_token %}
 
     <input type="hidden" name="type" id="type" value="material">
     <input type="hidden" name="buysell" id="buysell" value="sell">
 
     <b>Where is your item located?</b>
-    <select name="address_dropdown" id="address_dropdown" onchange="checkAddress()">
-    <option value="none" selected>Select...</option>
+    <select name="address_dropdown" id="address_dropdown" onchange="checkAddress()" required>
+    <option disabled selected value> Select... </option>
     <option value="account">Same address as my account</option>
     <option value="other">Different from my account</option>
     </select>
 
         <br />
-    <div id="optional_address" style="display:none;margin-left: 25px;"><br />
+    <div id="address"><br />
 
-        Street Address: <input type="text" name="" > <br /><br />
-        City: <input type="text" name="" maxlength="5"><br /><br />
-        State: <input type="text" name="" maxlength="2" size="5"><br /><br />
-        Zip: <input type="text" name="" maxlength="5" size="10"><br /><br />
+        <span id="loading_div" style="float:right;"></span>
+
+        <div id="optional_address" style="display:none;margin-left: 25px;">
+        <input type="text" id="custom_street" name="custom_street" size="30" placeholder="Street"> <br /><br />
+        <input type="text" id="custom_city" name="custom_city" size="30" placeholder="City"><br /><br />
+        <input type="text" id="custom_state" name="custom_state" maxlength="2" size="30" placeholder="State (Abbrv.)"><br /><br />
+        <input type="text" id="custom_zip" name="custom_zip" maxlength="5" size="30" placeholder="Zip"><br /><br />
+
+        <button type="button" class="btn btn-primary" onclick="updateListingMap();">Update Map</button><br /><br />
+
+        </div>
+        <div id="account_address"  style="display:none;margin-left: 25px; color:green;">
+        </div>
 
 
-
-    </div> <br />
+    </div>
 
     <b>Type of Material </b> <br /><br />
 
-    <select name="type_dropdown" id="type_dropdown"  onchange="checkMaterialOther()">
+    <select name="type_dropdown" id="type_dropdown"  onchange="checkMaterialOther()" required>
+    <option disabled selected value> Select... </option>
     <optgroup label="Fill">
     <option value="sand">Sand</option>
         <option value="clay">Clay</option>
@@ -83,6 +104,7 @@
     </select>
 
     <span id="other_explain_material" style="display:none;">
+        <br /><br />
      <i>Please describe your material:</i> <input type="text" name="custom_material" >
 
     </span>
@@ -90,22 +112,22 @@
         <br /><br />
 
     <b>Amount of material</b><br /><br />
-        <input type="text" id="material_amount" name="amount" size="5"> cubic yards
+        <input type="text" id="material_amount" name="material_amount" size="5" required> cubic yards
 
     <br /><br />
 
     <b>Price per cubic yard</b><br /><br />
-        $ <input type="text" id="material_price" name="material_price" size="5">  (Total price: $<span id="total_price" style="color:green;font-weight:bold;">0.00</span>)
+        <input type="text" id="material_price" name="material_price" size="5" required>  (Total price: $<span id="total_price" style="color:green;font-weight:bold;">0.00</span>)
 
     <br /><br />
 
     <b>Date Available</b><br /><br />
 
-        <input type="text" id="datepicker_available" name=datepicker_available"><br /><br />
+        <input type="text" id="datepicker_available" name="datepicker_available" required /><br /><br />
 
     <b>Expiration Date</b><br /><br />
 
-    <input type="text" id="datepicker_expiration" name=datepicker_expiration"><br /><br />
+    <input type="text" id="datepicker_expiration" name="datepicker_expiration" required /><br /><br />
 
      <b>Will you provide hauling for your item?</b>
     <select name="hauling_dropdown" id="hauling_dropdown" onchange="checkHauling()">
@@ -113,9 +135,9 @@
     <option value="no" selected>No</option>
     </select>
 
-    <span id="hauling_options" style="display:none;">
+        <span id="hauling_options" style="display:none;"> <br /><br />
 
-        Price: $<input type="text" id="hauling_price" name="hauling_price" size="5"> within
+        Price: <input type="text" id="hauling_price" name="hauling_price" size="5"> within
 
     <select name="hauling_distance_dropdown" id="hauling_distance_dropdown" onchange="checkHauling()">
     <option value="10">10</option>
@@ -138,9 +160,9 @@
     <option value="no" selected>No</option>
     </select>
 
-    <span id="loading_options" style="display:none;">
+    <span id="loading_options" style="display:none;"><br /><br />
 
-        Price: $<input type="text" id="loading_price" name="loading_price" size="5"> per cubic yard
+        Price: $ <input type="text" id="loading_price" name="loading_price" size="5"> per cubic yard
 
 
     </span>
@@ -148,25 +170,13 @@
 <br /><br />
  <b>Additional Description & Specifications</b>
         <br /><br />
-<textarea rows="5" cols="60" >
+<textarea name="comments" rows="5" cols="60" >
 
 </textarea>
 
 <br /><br />
 
-Upload images for your item: <button type="button" class="btn btn-warning" id="upload_image" onclick="comingSoon()">Upload</button>
-
-
-
-
-   </form>
-
-    <br /><br />
-    <center><button type="button" class="btn btn-primary" onclick="$('#materialSellForm').submit();">Create Listing</button></center>
-
-
-</div>
-<div id="listing_map"></div>
+    <center><input type="submit"  value="Create Listing" class="btn btn-primary" /></center>
 
 
 
@@ -174,6 +184,64 @@ Upload images for your item: <button type="button" class="btn btn-warning" id="u
 
 
 </div>
+<div id="listing_map">
+
+</div>
+
+<div id="image_preview"><button type="button" class="btn btn-warning" id="upload_image" onclick="previewImages()">Upload Photos</button>
+
+
+<br />
+
+    <div id="show_images"></div>
+
+</div>
+
+
+
+
+
+<div id="uploadImageModal" class="modal fade" role="dialog">
+  <div class="modal-dialog" style="width:600px;">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header"> Upload Images
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" name="mdhd"></h4>
+      </div>
+      <div class="modal-body" name="mdbd">
+
+{##}
+{#  <form method="post" enctype="multipart/form-data" action="/create_listing/upload_image" id="image_form">#}
+{#    {% csrf_token %}#}
+
+
+<center><input type="file" id="files" name="image_file_arr" multiple required> <br /><br />
+
+      <output id="list"></output>
+
+</center>
+
+{#  </form>#}
+<center><button type="button" class="btn btn-primary" id="submit_images" onclick="$('#show_images').html('<br />' + $('#list').html());$('#uploadImageModal').modal('hide');">Done Choosing</button></center>
+<br />
+<div style="font-style: italic;opacity: .5; font-size:10pt;text-align: center;">Tip: to upload multiple files, hold CTRL (or Command) while selecting photos</div>
+</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+</div>
+
+
 <br /><br /><br /><br /><br /><br />
 <br /><br /><br /><br /><br /><br />
 <br /><br /><br /><br /><br /><br />

@@ -1,0 +1,67 @@
+{% extends "base/base.html" %}
+{% autoescape on %}
+{% load staticfiles %}
+{% block content %}
+
+<script>
+
+
+$( document ).ready(function(){
+
+    var type = "{{type}}";
+    if(type==="materials"){
+        search_data = {"materials":"true","summary":"true"};
+    }
+    else if(type==="laydown_yards"){
+        search_data = {"laydown_yards":"true","summary":"true"};
+    }
+    else{
+        search_data = {"equipment":"true","summary":"true"};
+    }
+
+    $("#results_container").html("<div id='loading_results'><img src='/static/images/loading_gears.gif'></img><br /><br /></div>");
+
+    var csrftoken = getCookie('csrftoken');
+
+
+
+    jQuery.ajax({
+    headers : {'X-CSRFToken': csrftoken},
+    url: "/browse/search_listings",
+    type: "POST",
+    data: search_data,
+    dataType:"json",
+    success: function(result){
+
+        console.log(result)
+
+        postResults(result, true);
+
+    },error:function(result){
+        alert("search error")
+    }
+});
+
+});
+
+
+</script>
+<br /><br />
+<div id="maincontent">
+
+<div id="aboutwrapper">
+
+<div id="results_container">
+
+
+
+</div>
+
+
+</div>
+
+{% endblock %}
+
+
+
+{% endautoescape %}
