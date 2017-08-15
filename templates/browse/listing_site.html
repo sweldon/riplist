@@ -53,7 +53,7 @@
 
 <div id="item_description">
 
-    {{ title }}
+     {{ title }}
 
 </div>
 
@@ -79,7 +79,6 @@
 
 </div>
 
-
 <div id="item_address">
 
     <span class="glyphicon glyphicon-map-marker" style="font-size:11pt;"></span> {{ address }}
@@ -92,15 +91,41 @@
 
         <tr><td>Date Available</td><td>{{ date_available }}</td></tr>
         <tr><td>Expiration Date</td><td>{{ date_expiration }}</td></tr>
-        {% if loading  != "" %}
-        <tr><td>Loading Price</td><td>${{ loading }}</td></tr>
+        {% if fenced  != "" %}
+            <tr><td>Fenced</td><td>{{ fenced }}</td></tr>
         {% else %}
-        <tr><td>Loading Price</td><td>Not Offered</td></tr>
+        <tr><td>Fenced</td><td>No</td></tr>
         {% endif %}
-        {% if haul_price  != "" %}
-            <tr><td>Hauling Price</td><td>${{ haul_price }} (within <b>{{ haul_distance }}</b> miles)</td></tr>
+
+        {% if gated  != "" %}
+            <tr><td>Gated</td><td>{{ gated }}</td></tr>
         {% else %}
-        <tr><td>Hauling Price</td><td>Not Offered</td></tr>
+        <tr><td>Gated</td><td>No</td></tr>
+        {% endif %}
+
+        {% if num_entrances  != "" %}
+            <tr><td>Entrances</td><td>{{ num_entrances }}</td></tr>
+
+            {% if width_entrances  != "" %}
+                <tr><td>Entrance Widths</td><td>{{ width_entrances }}</td></tr>
+            {% else %}
+            <tr><td>Entrance Widths</td><td>Unavailable</td></tr>
+            {% endif %}
+
+        {% else %}
+        <tr><td>Entrances</td><td>Unavailable</td></tr>
+        {% endif %}
+
+        {% if utilities  != "" %}
+            <tr><td>Utilities</td><td>{{ utilities }}</td></tr>
+        {% else %}
+        <tr><td>Utilities</td><td>No</td></tr>
+        {% endif %}
+
+        {% if ammenities  != "" %}
+            <tr><td>Ammenities</td><td>{{ ammenities }}</td></tr>
+        {% else %}
+        <tr><td>Ammenities</td><td>No</td></tr>
         {% endif %}
 
     </table>

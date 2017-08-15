@@ -378,7 +378,101 @@ def materials(request):
 
 
 
-    return render(request, 'browse/listing.html',  {'title': title, 'images':images, 'price':price, 'address':address,
-                                                    'loading':loading, 'haul_price':haul_price,
-                                                    'haul_distance':haul_distance, 'date_available':date_available,
-                                                    'date_expiration':date_expiration, 'comments':comments, 'seller':seller})
+    return render(request, 'browse/listing.html',  {'title': title,
+                                                    'images':images,
+                                                    'price':price,
+                                                    'address':address,
+                                                    'loading':loading,
+                                                    'haul_price':haul_price,
+                                                    'haul_distance':haul_distance,
+                                                    'date_available':date_available,
+                                                    'date_expiration':date_expiration,
+                                                    'comments':comments,
+                                                    'seller':seller})
+
+def equipment(request):
+
+    listing_id = request.GET.get("id")
+    listing = Equipment.objects.get(id=listing_id)
+    type = listing.type
+    address = str(listing.address) + ", " + str(listing.city) + ", " + str(listing.state) + ", " + str(listing.zip)
+    make = str(listing.make)
+    model = str(listing.model)
+    year = str(listing.year)
+    attachments = str(listing.attachments)
+    hauling = str(listing.hauling_options)
+    trailer = str(listing.trailer)
+    operator = str(listing.operator)
+    fuel = str(listing.fuel)
+    date_available = str(listing.date_available)
+    expiration_date = str(listing.expiration_date)
+    date_needed = str(listing.date_needed)
+    rate = str(listing.rate)
+    price = str(listing.price) + " / " + str(rate)
+    comments = str(listing.comments)
+    seller = str(User.objects.get(id=int(listing.author)).username)
+    title = str(year) + " " + str(make) + " " + str(model) + " " + str(type)
+    images = [str(image) for image in listing.images.split(',')]
+
+
+
+    return render(request, 'browse/listing_equipment.html',  {  'title': title,
+                                                                'images':images,
+                                                                'price':price,
+                                                                'address':address,
+                                                                'date_available':date_available,
+                                                                'comments':comments,
+                                                                'seller':seller,
+                                                                'year':year,
+                                                                'attachments':attachments,
+                                                                'hauling':hauling,
+                                                                'trailer':trailer,
+                                                                'operator':operator,
+                                                                'fuel':fuel,
+                                                                'date_expiration':expiration_date,
+                                                                'date_needed':date_needed,
+                                                                'rate':rate
+                                                              })
+
+def sites(request):
+
+    listing_id = request.GET.get("id")
+    listing = Site.objects.get(id=listing_id)
+    address = str(listing.address) + ", " + str(listing.city) + ", " + str(listing.state) + ", " + str(listing.zip)
+    surface = str(listing.surface)
+    fenced = str(listing.fenced)
+    size = str(listing.size)
+    gated = str(listing.gated)
+    num_entrances = str(listing.num_entrances)
+    width_entrances = str(listing.width_entrances)
+    utilities = str(listing.utilities)
+    ammenities = str(listing.ammenities)
+    date_available = str(listing.date_available)
+    expiration_date = str(listing.expiration_date)
+    rate = str(listing.rate)
+    price = str(listing.price) + " / " + str(rate)
+    comments = str(listing.comments)
+    seller = str(User.objects.get(id=int(listing.author)).username)
+    title = str(size) + " " + str(surface) + " - " + str(listing.city) + ",  " + str(listing.state)
+    images = [str(image) for image in listing.images.split(',')]
+
+
+
+    return render(request, 'browse/listing_site.html',  {  'title': title,
+                                                                'images':images,
+                                                                'price':price,
+                                                                'address':address,
+                                                                'date_available':date_available,
+                                                                'comments':comments,
+                                                                'seller':seller,
+                                                                'date_expiration':expiration_date,
+                                                                'rate':rate,
+                                                                'surface':surface,
+                                                                'fenced':fenced,
+                                                                'size':size,
+                                                                'gated':gated,
+                                                                'num_entrances':num_entrances,
+                                                                'width_entrances':width_entrances,
+                                                                'utilities':utilities,
+                                                                'ammenities':ammenities
+                                                              })

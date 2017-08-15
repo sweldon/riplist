@@ -9,7 +9,6 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-
 #
 # def get_file_path(instance, filename):
 #     ext = filename.split('.')[-1]
@@ -153,9 +152,10 @@ class Equipment(models.Model):
     rate = models.CharField(max_length=10)
     comments = models.TextField()
     author = models.IntegerField()
+    images = models.TextField(null=True, blank=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'equipment'
 
 
@@ -209,9 +209,10 @@ class Site(models.Model):
     rate = models.CharField(max_length=10)
     comments = models.TextField()
     author = models.IntegerField()
+    images = models.TextField(null=True, blank=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'site'
 
 

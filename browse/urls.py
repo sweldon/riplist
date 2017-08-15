@@ -11,5 +11,7 @@ urlpatterns = [
     url(r'^all_materials/$', views.all_materials, name='all_materials'),
     url(r'^all_equipment/$', views.all_equipment, name='all_equipment'),
     url(r'^all_sites/$', views.all_sites, name='all_sites'),
+    url(r'^equipment/$', views.equipment, name='equipment'),
+    url(r'^sites/$', views.sites, name='sites'),
 
 ]

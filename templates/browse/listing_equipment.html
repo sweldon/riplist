@@ -79,7 +79,6 @@
 
 </div>
 
-
 <div id="item_address">
 
     <span class="glyphicon glyphicon-map-marker" style="font-size:11pt;"></span> {{ address }}
@@ -92,15 +91,34 @@
 
         <tr><td>Date Available</td><td>{{ date_available }}</td></tr>
         <tr><td>Expiration Date</td><td>{{ date_expiration }}</td></tr>
-        {% if loading  != "" %}
-        <tr><td>Loading Price</td><td>${{ loading }}</td></tr>
+        {% if hauling  != "" %}
+            <tr><td>Hauling Options</td><td>{{ hauling }}</td></tr>
         {% else %}
-        <tr><td>Loading Price</td><td>Not Offered</td></tr>
+        <tr><td>Hauling Options</td><td>Not Offered</td></tr>
         {% endif %}
-        {% if haul_price  != "" %}
-            <tr><td>Hauling Price</td><td>${{ haul_price }} (within <b>{{ haul_distance }}</b> miles)</td></tr>
+
+        {% if attachments  != "" %}
+            <tr><td>Attachments</td><td>{{ attachments }}</td></tr>
         {% else %}
-        <tr><td>Hauling Price</td><td>Not Offered</td></tr>
+        <tr><td>Attachments</td><td>Not Offered</td></tr>
+        {% endif %}
+
+        {% if trailer  != "" %}
+            <tr><td>Trailer</td><td>{{ trailer }}</td></tr>
+        {% else %}
+        <tr><td>Trailer</td><td>Not Offered</td></tr>
+        {% endif %}
+
+        {% if operator  != "" %}
+            <tr><td>Operator</td><td>{{ operator }}</td></tr>
+        {% else %}
+        <tr><td>Operator</td><td>Not Offered</td></tr>
+        {% endif %}
+
+        {% if fuel  != "" %}
+            <tr><td>Fuel</td><td>{{ fuel }}</td></tr>
+        {% else %}
+        <tr><td>Fuel</td><td>Not Offered</td></tr>
         {% endif %}
 
     </table>
