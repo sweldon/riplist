@@ -300,7 +300,7 @@ float:left;
 .image-slider img{
 	height: calc(50vh - 100px);
 	margin: 0 auto; /* it centers any block level element */
-	max-height: 400px;
+	height:370px;
 	min-width:375px;
 }
 #browse_wrapper{

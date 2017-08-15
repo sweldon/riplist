@@ -9,6 +9,7 @@ from django.core.files.storage import FileSystemStorage
 from browse.models import UserProfile
 import uuid
 import os
+from django.shortcuts import redirect
 
 def get_file_path(instance, filename):
     ext = filename.split('.')[-1]
@@ -137,7 +138,7 @@ def submit_listing(request):
 
         new_material.save()
 
-        return render(request, 'browse/404.html')
+        return redirect('/browse/materials/?id='+str(new_material.id))
 
     else:
 

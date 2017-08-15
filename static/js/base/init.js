@@ -232,7 +232,7 @@ function query(search_data) {
         postResults(result, false);
 
     },error:function(result){
-        alert("search error")
+
     }
 });
     }
