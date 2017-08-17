@@ -13,5 +13,7 @@ urlpatterns = [
     url(r'^all_sites/$', views.all_sites, name='all_sites'),
     url(r'^equipment/$', views.equipment, name='equipment'),
     url(r'^sites/$', views.sites, name='sites'),
+    url(r'^user_agreement/$', views.user_agreement, name='user_agreement'),
+    url(r'^privacy/$', views.privacy, name='privacy'),
 
 ]

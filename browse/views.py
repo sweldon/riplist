@@ -30,6 +30,13 @@ def all_materials(request):
 def about(request):
     return render(request, 'base/about.html')
 
+
+def user_agreement(request):
+    return render(request, 'base/user_agreement.html')
+
+def privacy(request):
+    return render(request, 'base/privacy.html')
+
 def search_listings(request):
     geolocator = Nominatim()
     results = {}
